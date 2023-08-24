@@ -1,0 +1,33 @@
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\bin\Debug\Tapkob.exe.config
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\bin\Debug\Tapkob.exe
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\bin\Debug\Tapkob.pdb
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob.csproj.AssemblyReference.cache
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Templates.baml
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\MainWindow.g.cs
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\App.g.cs
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob_MarkupCompile.cache
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob_MarkupCompile.lref
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\MainWindow.baml
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob.g.resources
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob.Properties.Resources.resources
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob.csproj.GenerateResource.cache
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob.csproj.CoreCompileInputs.cache
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob.exe
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\Tapkob.pdb
+C:\Users\jedwards2\Documents\Independent\Tapkob\Tapkob\Tapkob\obj\Debug\App.baml
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\bin\Debug\Tapkob.exe.config
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\bin\Debug\Tapkob.exe
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\bin\Debug\Tapkob.pdb
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob.csprojAssemblyReference.cache
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Templates.baml
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\MainWindow.g.cs
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\App.g.cs
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob_MarkupCompile.cache
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob_MarkupCompile.lref
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\App.baml
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\MainWindow.baml
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob.g.resources
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob.Properties.Resources.resources
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob.csproj.GenerateResource.cache
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob.exe
+C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\Tapkob.pdb

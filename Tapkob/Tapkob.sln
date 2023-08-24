@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33920.266
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tapkob", "Tapkob\Tapkob.csproj", "{429C2AA8-46E8-47BF-B1FD-0B54C045BFBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{429C2AA8-46E8-47BF-B1FD-0B54C045BFBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429C2AA8-46E8-47BF-B1FD-0B54C045BFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429C2AA8-46E8-47BF-B1FD-0B54C045BFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{429C2AA8-46E8-47BF-B1FD-0B54C045BFBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {217AFC27-B1BD-4711-9267-9EA1EE9DF609}
+	EndGlobalSection
+EndGlobal
