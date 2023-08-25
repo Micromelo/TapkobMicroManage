@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Tapkob",
+    "\\Tapkob\\Model",
+    "\\Tapkob\\Resources",
+    "\\Tapkob\\Utilities",
+    "\\Tapkob\\View",
+    "\\Tapkob\\ViewModel"
+  ],
+  "SelectedNode": "\\Tapkob\\Utilities\\RelayCommand.cs",
+  "PreviewInSolutionExplorer": false
+}

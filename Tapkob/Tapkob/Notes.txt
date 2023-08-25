@@ -1,0 +1,107 @@
+﻿{
+  tasks {
+    id
+    tarkovDataId
+    name
+    normalizedName
+    trader {
+      name
+    }
+    map {
+      name
+    }
+    experience
+    wikiLink
+    taskImageLink
+    minPlayerLevel
+    taskRequirements {
+      task {
+        name
+      }
+    }
+    traderRequirements {
+      requirementType
+    }
+    objectives {
+      description
+    }
+    startRewards {
+      items {
+        item {
+          name
+        }
+      }
+    }
+    finishRewards {
+      items {
+        item {
+          name
+        }
+      }
+    }
+    failConditions {
+      description
+    }
+    failureOutcome {
+      items {
+        item {
+          name
+        }
+      }
+    }
+    restartable
+    factionName
+    neededKeys {
+      keys {
+        name
+      }
+    }
+    kappaRequired
+    lightkeeperRequired
+    descriptionMessageId
+    startMessageId
+    successMessageId
+    failMessageId
+  }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+{
+  tasks {
+    id
+    name
+    trader {
+      name
+    }
+    map {
+      name
+    }
+    experience
+    wikiLink
+    taskImageLink
+    minPlayerLevel
+    taskRequirements {
+      task {
+        name
+      }
+    }
+    objectives {
+      description
+    }
+    finishRewards {
+      items {
+        item {
+          name
+        }
+      }
+    }
+    neededKeys {
+      keys {
+        name
+      }
+    }
+    kappaRequired
+    lightkeeperRequired
+  }
+}

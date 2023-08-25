@@ -8,11 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_close_active.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_close_idle.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_maximise_active.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_maximise_idle.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_minimise_active.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_minimise_idle.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_fence.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_jaeger.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_lightkeeper.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_mechanic.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_peacekeeper.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_prapor.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_ragman.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_skier.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icons/icon_trader_therapist.png")]
 
 

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\obj\Debug\
+C:\Users\yoshi\Documents\Git Repositories\TapkobMicroManage\Tapkob\Tapkob\obj\Debug\
 Tapkob
 none
 false
 DEBUG;TRACE
-C:\Users\yoshi\Documents\Git Repositories\Tapkob\Tapkob\App.xaml
-21811991460
+C:\Users\yoshi\Documents\Git Repositories\TapkobMicroManage\Tapkob\Tapkob\App.xaml
+41809185869
 
-5-2017746502
-13-1505183044
-MainWindow.xaml;Templates.xaml;
+20-408272682
+135157020417
+View\MainWindow.xaml;Templates.xaml;View\HomeView.xaml;View\QuestsView.xaml;
 
 False
 
