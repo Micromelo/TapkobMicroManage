@@ -89,21 +89,5 @@ namespace Tapkob.Services
         {
             public List<TaskModel> tasks { get; set; }
         }
-
-        public class TaskData
-        {
-            public string id { get; set; }
-            public string name { get; set; }
-            public List<TaskRequirementsData> taskRequirements { get; set; }
-        }
-        public class TaskRequirementsData
-        {
-            public TaskData task { get; set; }
-        }
-
-        public class TraderData
-        {
-            string name { get; set; }
-        }
     }
 }

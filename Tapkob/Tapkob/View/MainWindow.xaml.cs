@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Tapkob.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using System.Windows.Input;
+using Tapkob.ViewModel;
 
 namespace Tapkob
 {
@@ -20,7 +21,8 @@ namespace Tapkob
         public MainWindow()
         {
             InitializeComponent();
-
+            MainVM vm = new MainVM();
+            DataContext = vm;
             UpdateTasks();
         }
         private async Task UpdateTasks()
