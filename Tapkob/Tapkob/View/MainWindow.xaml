@@ -28,7 +28,7 @@
             <StackPanel Background="#2E333A"
                     Width="230"
                     Orientation="Vertical"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Left" MouseDown="StackPanel_SideBar_MouseDown">
 
                 <!--// Application Name //-->
                 <Grid Height="50"
@@ -157,7 +157,7 @@
             <Grid Background="#2E333e"
                     Height="50"
                     VerticalAlignment="Top"
-                    Grid.Column="1">
+                    Grid.Column="1" MouseDown="Grid_TopBar_MouseDown">
 
                 <!--// Minimise/Maximise/Close Application //-->
                 <StackPanel Orientation="Horizontal"

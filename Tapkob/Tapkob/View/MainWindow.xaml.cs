@@ -6,6 +6,7 @@ using Tapkob.Services;
 using System.Collections.Generic;
 using Tapkob.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+using System.Windows.Input;
 
 namespace Tapkob
 {
@@ -26,6 +27,7 @@ namespace Tapkob
         {
             await TarkovDev.GetTasks();
         }
+
         #region Menu Item Buttons
         private void MenuItemHome_Click(object sender, RoutedEventArgs e)
         {
@@ -81,6 +83,20 @@ namespace Tapkob
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+        #endregion
+
+        #region Windows Events
+        private void Grid_TopBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void StackPanel_SideBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
         #endregion
     }

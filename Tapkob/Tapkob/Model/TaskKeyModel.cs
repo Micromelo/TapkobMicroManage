@@ -8,5 +8,7 @@ namespace Tapkob.Model
 {
     public class TaskKeyModel
     {
+        public ItemModel[] keys { get; set; }
+        public MapModel map { get; set; }
     }
 }
