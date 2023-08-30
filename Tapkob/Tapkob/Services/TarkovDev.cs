@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,22 +18,10 @@ namespace Tapkob.Services
         private static readonly GraphQLHttpClient client = new GraphQLHttpClient("https://api.tarkov.dev/graphql", new SystemTextJsonSerializer());
         private static readonly HttpClient httpClient = new HttpClient();
 
-        public static List<TaskModel> Tasks { get; private set; } = new List<TaskModel>();
+        public static ObservableCollection<TaskModel> Tasks { get; private set; } = new ObservableCollection<TaskModel>();
 
-        public async static Task<List<TaskModel>> GetTasks()
+        public async static Task<ObservableCollection<TaskModel>> GetTasks()
         {
-            //var request = new GraphQL.GraphQLRequest()
-            //{
-            //    Query = @"
-            //        query {
-            //            tasks {
-            //                id
-            //                name
-            //            }
-            //        }
-            //    "
-            //};
-
             var request = new GraphQL.GraphQLRequest()
             {
                 Query = @"
@@ -79,15 +68,15 @@ namespace Tapkob.Services
             //            name
             //                    }
             //    }
-            
+
             var response = await client.SendQueryAsync<TasksResponse>(request);
             Tasks = response.Data.tasks;
             return Tasks;
         }
-
         public class TasksResponse
         {
-            public List<TaskModel> tasks { get; set; }
+            public ObservableCollection<TaskModel> tasks { get; set; }
         }
+
     }
 }

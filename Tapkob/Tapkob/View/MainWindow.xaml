@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tapkob" 
         xmlns:views="clr-namespace:Tapkob.View"
-        xmlns:viewmodel="clr-namespace:Tapkob.ViewModel"
+        xmlns:viewmodel="clr-namespace:Tapkob.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         Title="MainWindow" 
         Background="Transparent"
@@ -74,7 +75,7 @@
 
                     <!--// Main Menu - Quests //-->
                     <MenuItem Header="Quests"
-                          Template="{StaticResource Menu_SubMenu_Template}">
+                          Template="{StaticResource Menu_SubMenu_Template}" Click="MenuItem_Click">
 
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_quest.png"></Image>
@@ -176,14 +177,14 @@
                 </StackPanel>
             </Grid>
 
+            <ContentControl Content="{Binding CurrentVM}"></ContentControl>
+
 
             <Grid Margin="0,50,0,0" 
                   Grid.Column="1">
-                <views:QuestsView></views:QuestsView>
+                <views:HomeView></views:HomeView>
             </Grid>
         </Grid>
-
-        
 
     </Border>
     

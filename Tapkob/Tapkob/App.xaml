@@ -2,9 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Tapkob"
+             xmlns:viewmodel="clr-namespace:Tapkob.ViewModel"
+             xmlns:view="clr-namespace:Tapkob.View"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-        
+
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
@@ -13,7 +15,14 @@
 
             </ResourceDictionary.MergedDictionaries>
 
+            <DataTemplate DataType="{x:Type TypeName=viewmodel:HomeVM}">
+                <view:HomeView></view:HomeView>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewmodel:QuestsVM}">
+                <view:QuestsView></view:QuestsView>
+            </DataTemplate>
+
         </ResourceDictionary>
-        
     </Application.Resources>
 </Application>

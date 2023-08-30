@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Tapkob.View"
+             xmlns:local="clr-namespace:Tapkob.View" xmlns:viewmodel="clr-namespace:Tapkob.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:QuestsVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -72,7 +72,8 @@
             </Button>
         </StackPanel>
 
-        <ListView Grid.Row="1"
+        <ListView ItemsSource="{Binding Tasks}"
+                  Grid.Row="1"
                   Margin="5,0,5,5">
             <ListViewItem></ListViewItem>
 
@@ -84,7 +85,8 @@
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Completed">
+                    <GridViewColumn DisplayMemberBinding= "{Binding isCompleted}" 
+                                    Header="Status">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="Boolean"
@@ -93,7 +95,18 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Quest">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=taskObjectives[0].type}" 
+                                    Header="Type">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Type"
+                                           HorizontalAlignment="Center">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding name}" 
+                                    Header="Task">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="QuestName" 
@@ -102,34 +115,8 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Type">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="TypeName"           
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Objectives">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="Objectives"           
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Rewards">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="Rewards"           
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Required for Kappa">
+                    <GridViewColumn DisplayMemberBinding="{Binding kappaRequired}" 
+                                    Header="Required for Kappa">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="Boolean"           
@@ -138,7 +125,8 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Required for Lightkeeper">
+                    <GridViewColumn DisplayMemberBinding="{Binding lightkeeperRequired}" 
+                                    Header="Required for Lightkeeper">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="Boolean"

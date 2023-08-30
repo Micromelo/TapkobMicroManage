@@ -9,11 +9,11 @@ namespace Tapkob.ViewModel
 {
     internal class MainVM : BaseVM
     {
-        public BaseVM CurrentVM { get; set; }
-
-        public MainVM()
+        private BaseVM _currentVM;
+        public BaseVM CurrentVM
         {
-            CurrentVM = new HomeVM();
+            get { return _currentVM; }
+            set { _currentVM = value; }
         }
     }
 }

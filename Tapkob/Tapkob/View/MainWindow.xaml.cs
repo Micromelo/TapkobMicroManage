@@ -21,8 +21,7 @@ namespace Tapkob
         public MainWindow()
         {
             InitializeComponent();
-            MainVM vm = new MainVM();
-            DataContext = vm;
+            DataContext = new MainVM();
             UpdateTasks();
         }
         private async Task UpdateTasks()
@@ -101,5 +100,10 @@ namespace Tapkob
                 this.DragMove();
         }
         #endregion
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
