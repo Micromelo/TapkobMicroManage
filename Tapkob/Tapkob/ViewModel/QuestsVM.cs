@@ -11,16 +11,17 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Tapkob.ViewModel
 {
-    internal class QuestsVM : BaseVM
+    public class QuestsVM : BaseVM
     {
-        public ObservableCollection<TaskModel> Tasks = new ObservableCollection<TaskModel>();
+        public ObservableCollection<TaskModel> Tasks { get; set; }
 
         public QuestsVM()
         {
-            LoadTasks();
+            Tasks = new ObservableCollection<TaskModel>();
+            Tasks = TarkovDev.Tasks;
         }
 
-        private void LoadTasks()
+        public void LoadTasks()
         {
             Tasks = TarkovDev.Tasks;
         }

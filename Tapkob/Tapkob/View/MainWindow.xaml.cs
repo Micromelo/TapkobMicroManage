@@ -22,13 +22,8 @@ namespace Tapkob
         {
             InitializeComponent();
             DataContext = new MainVM();
-            UpdateTasks();
         }
-        private async Task UpdateTasks()
-        {
-            await TarkovDev.GetTasks();
-        }
-
+        
         #region Menu Item Buttons
         private void MenuItemHome_Click(object sender, RoutedEventArgs e)
         {

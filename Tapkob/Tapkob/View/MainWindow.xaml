@@ -66,7 +66,9 @@
 
                     <!--// Main Menu - Home //-->
                     <MenuItem Header="Home"
-                          Template="{StaticResource Menu_Template}">
+                              Template="{StaticResource Menu_Template}"
+                              Command="{Binding UpdateViewCommand}"
+                              CommandParameter="Home">
 
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_home.png"></Image>
@@ -75,7 +77,10 @@
 
                     <!--// Main Menu - Quests //-->
                     <MenuItem Header="Quests"
-                          Template="{StaticResource Menu_SubMenu_Template}" Click="MenuItem_Click">
+                              Template="{StaticResource Menu_SubMenu_Template}" 
+                              Click="MenuItem_Click"
+                              Command="{Binding UpdateViewCommand}"
+                              CommandParameter="Quests">
 
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_quest.png"></Image>
@@ -177,12 +182,12 @@
                 </StackPanel>
             </Grid>
 
-            <ContentControl Content="{Binding CurrentVM}"></ContentControl>
+            
 
 
             <Grid Margin="0,50,0,0" 
                   Grid.Column="1">
-                <views:HomeView></views:HomeView>
+                <ContentControl Content="{Binding CurrentVM}"></ContentControl>
             </Grid>
         </Grid>
 

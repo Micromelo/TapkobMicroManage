@@ -77,6 +77,5 @@ namespace Tapkob.Services
         {
             public ObservableCollection<TaskModel> tasks { get; set; }
         }
-
     }
 }

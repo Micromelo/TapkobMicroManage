@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tapkob.Services;
 using Tapkob.ViewModel;
 
 namespace Tapkob.View
@@ -24,8 +25,12 @@ namespace Tapkob.View
         public QuestsView()
         {
             InitializeComponent();
-            QuestsVM vm = new QuestsVM();
-            DataContext = vm;
+            UpdateTasks();
+        }
+
+        private async Task UpdateTasks()
+        {
+            await TarkovDev.GetTasks();
         }
     }
 }
