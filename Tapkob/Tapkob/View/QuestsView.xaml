@@ -75,6 +75,7 @@
         <ListView ItemsSource="{Binding Tasks}"
                   Grid.Row="1"
                   Margin="5,0,5,5">
+
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

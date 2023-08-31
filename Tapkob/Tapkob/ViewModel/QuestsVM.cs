@@ -18,7 +18,7 @@ namespace Tapkob.ViewModel
         public QuestsVM()
         {
             Tasks = new ObservableCollection<TaskModel>();
-            Tasks = TarkovDev.Tasks;
+            LoadTasks();
         }
 
         public void LoadTasks()

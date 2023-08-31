@@ -25,12 +25,6 @@ namespace Tapkob.View
         public QuestsView()
         {
             InitializeComponent();
-            UpdateTasks();
-        }
-
-        private async Task UpdateTasks()
-        {
-            await TarkovDev.GetTasks();
         }
     }
 }

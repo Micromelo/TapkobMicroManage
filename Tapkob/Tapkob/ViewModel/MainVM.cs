@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tapkob.Commands;
+using Tapkob.Services;
 using Tapkob.Utilities;
 
 namespace Tapkob.ViewModel
@@ -27,6 +28,12 @@ namespace Tapkob.ViewModel
         public MainVM()
         {
             UpdateViewCommand = new UpdateViewCommand(this);
+            UpdateTasks();
+        }
+
+        private async Task UpdateTasks()
+        {
+            await TarkovDev.GetTasks();
         }
     }
 }
