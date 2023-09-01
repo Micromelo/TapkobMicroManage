@@ -72,65 +72,229 @@
             </Button>
         </StackPanel>
 
-        <ListView ItemsSource="{Binding Tasks}"
-                  Grid.Row="1"
-                  Margin="5,0,5,5">
+        <!--// Main Tasks View //-->
+        <Grid Width="395" 
+              Grid.Row="1"
+              HorizontalAlignment="Left">
 
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
+            <!--// Complete Task Button //-->
+            <Button Height="40"
+                    Margin="5,5,5,5"
+                    VerticalAlignment="Top">
+                <TextBlock Text="COMPLETE"
+                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontSize="15"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center">
+                </TextBlock>
+            </Button>
 
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Status">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding isCompleted}"
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Type">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=taskObjectives[0].type}"
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Task">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding name}" 
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Required for Kappa">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding kappaRequired}"           
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Required for Lightkeeper">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding lightkeeperRequired}"
-                                           HorizontalAlignment="Center">
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+            <!--// Show Completed Tasks //-->
+            <Grid Background="#2E333A"
+                  Height="18"
+                  Margin="5,48,5,0"
+                  VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <CheckBox></CheckBox>
+                    <TextBlock Text="Show Completed"
+                               Foreground="#FFFFFF"
+                               FontFamily="Resources/Fonts/#Orbitron Medium"
+                               FontSize="12"
+                               Margin="5,0,0,0">
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+
+            <!--// Task List //-->
+            <ListView ItemsSource="{Binding Tasks}"
+                      SelectedItem="{Binding SelectedTask}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      VerticalAlignment="Stretch"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Margin="5,70,5,5">
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Style>
+                </ListView.Resources>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView,AncestorLevel=1},Path=ActualWidth}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="90"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Background="#2E333A"
+                                                Grid.Column="0"
+                                                MinHeight="80"
+                                                Margin="0,0,5,0">
+                                            <TextBlock Text="{Binding name}" 
+                                                           TextWrapping="Wrap"
+                                                           Foreground="#FFFFFF"
+                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontSize="15"
+                                                           HorizontalAlignment="Center" 
+                                                           VerticalAlignment="Center">
+                                            </TextBlock>
+                                        </Border>
+                                        <Border Background="#2E333A"
+                                                Grid.Column="1"
+                                                MinWidth="30"
+                                                MinHeight="80">
+                                            <TextBlock Text="{Binding isCompleted}" 
+                                                           TextWrapping="Wrap"
+                                                           Foreground="#FFFFFF"
+                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontSize="15"
+                                                           HorizontalAlignment="Center" 
+                                                           VerticalAlignment="Center">
+                                            </TextBlock>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <!--// Task Information Grid //-->
+        <Grid Grid.Row="1"
+              Margin="400,0,0,0"
+              HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Background="#2E333A"
+                      Grid.Row="0"
+                      Height="40"
+                      VerticalAlignment="Top"
+                      Margin="5,5,10,5">
+                    <TextBlock Text="{Binding SelectedTask.name}"
+                           Foreground="#FFFFFF"
+                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontSize="15"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center">
+                    </TextBlock>
+                </Grid>
+
+                <TextBlock Text="Objectives"
+                           Grid.Row="1"
+                           Foreground="#FFFFFF"
+                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontSize="15"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Margin="5,0,0,0">
+                </TextBlock>
+
+                <ListView ItemsSource="{Binding SelectedTask.objectives}"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Grid.Row="2"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          Margin="0,5,10,5">
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView,AncestorLevel=1},Path=ActualWidth}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#2E333A"
+                                                MinHeight="80">
+                                            <TextBlock Text="{Binding description}" 
+                                                           TextWrapping="Wrap"
+                                                           Foreground="#FFFFFF"
+                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontSize="15"
+                                                           Margin="10,0,10,0"
+                                                           HorizontalAlignment="Center" 
+                                                           VerticalAlignment="Center">
+                                            </TextBlock>
+                                        </Border>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+
+
+                </ListView>
+
+                <TextBlock Text="Keys Needed"
+                           Grid.Row="3"
+                           Foreground="#FFFFFF"
+                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontSize="15"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Margin="5,0,0,0">
+                </TextBlock>
+
+                <ListView ItemsSource="{Binding TaskKeys}"
+                          Grid.Row="4"
+                          Margin="5,5,10,5">
+
+                </ListView>
+
+                <TextBlock Text="Rewards"
+                           Grid.Row="5"
+                           Foreground="#FFFFFF"
+                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontSize="15"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           Margin="5,0,0,0">
+                </TextBlock>
+
+                <ListView ItemsSource="{Binding TaskRewards}"
+                          Grid.Row="6"
+                          Margin="5,5,10,5">
+                </ListView>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

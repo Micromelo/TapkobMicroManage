@@ -27,9 +27,10 @@
 
             <!--// Navigation Side Panel //-->
             <StackPanel Background="#2E333A"
-                    Width="230"
-                    Orientation="Vertical"
-                    HorizontalAlignment="Left" MouseDown="StackPanel_SideBar_MouseDown">
+                        Width="230"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left" 
+                        MouseDown="StackPanel_SideBar_MouseDown">
 
                 <!--// Application Name //-->
                 <Grid Height="50"

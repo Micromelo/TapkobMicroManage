@@ -14,6 +14,22 @@ namespace Tapkob.ViewModel
     public class QuestsVM : BaseVM
     {
         public ObservableCollection<TaskModel> Tasks { get; set; }
+        private TaskModel selectedTask;
+        public TaskModel SelectedTask 
+        {
+            get
+            {
+                return selectedTask;
+            }
+            set 
+            {
+                selectedTask = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<TaskObjectiveModel> TaskObjectives { get; set; }
+        public ObservableCollection<ItemModel> TaskKeys { get; set; }
+        public ObservableCollection<TaskModel> TaskRewards { get; set; }
 
         public QuestsVM()
         {

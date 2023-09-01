@@ -14,7 +14,7 @@ namespace Tapkob.Model
         public string imageLink { get; set; }
         public int minPlayerLevel { get; set; }
         public TaskModel[] taskRequirements { get; set; }
-        public TaskObjectiveModel[] taskObjectives { get; set; }
+        public TaskObjectiveModel[] objectives { get; set; }
         public TaskRewardModel taskRewards { get; set; }
         public TaskKeyModel[] taskKeys { get; set; }
         public bool kappaRequired { get; set; }
