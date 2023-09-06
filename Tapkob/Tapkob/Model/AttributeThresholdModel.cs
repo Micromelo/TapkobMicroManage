@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Tapkob.Model
 {
-    public class TraderModel
+    public class AttributeThresholdModel
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        [JsonProperty("requirement")]
+        public NumberCompareModel Requirement { get; set; }
     }
 }

@@ -53,6 +53,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -107,6 +110,36 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\UpdateViewCommand.cs" />
+    <Compile Include="Interfaces\ITaskObjective.cs" />
+    <Compile Include="Model\AttributeThresholdModel.cs" />
+    <Compile Include="Model\ContainedItemModel.cs" />
+    <Compile Include="Model\CraftModel.cs" />
+    <Compile Include="Model\HealthEffectModel.cs" />
+    <Compile Include="Model\HideoutStationLevelModel.cs" />
+    <Compile Include="Model\HideoutStationModel.cs" />
+    <Compile Include="Model\ItemAttributeModel.cs" />
+    <Compile Include="Model\NumberCompareModel.cs" />
+    <Compile Include="Model\OfferUnlockModel.cs" />
+    <Compile Include="Model\RequirementHideoutStationLevelModel.cs" />
+    <Compile Include="Model\RequirementItemModel.cs" />
+    <Compile Include="Model\RequirementSkillModel.cs" />
+    <Compile Include="Model\RequirementTraderModel.cs" />
+    <Compile Include="Model\SkillLevelModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveBuildItemModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveExperienceModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveExtractModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveItemModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveMarkModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectivePlayerLevelModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveQuestItemModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveShootModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveSkillModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveTaskStatusModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveTraderLevelModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveUseItemModel.cs" />
+    <Compile Include="Model\TaskQuestItemModel.cs" />
+    <Compile Include="Model\TaskStatusRequirementModel.cs" />
+    <Compile Include="Model\TraderStandingModel.cs" />
     <Compile Include="Services\TarkovDev.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
@@ -149,7 +182,7 @@
     <Compile Include="Model\MapModel.cs" />
     <Compile Include="Model\TaskKeyModel.cs" />
     <Compile Include="Model\TaskModel.cs" />
-    <Compile Include="Model\TaskObjectiveModel.cs" />
+    <Compile Include="Model\TaskObjective\TaskObjectiveBasicModel.cs" />
     <Compile Include="Model\TaskRewardModel.cs" />
     <Compile Include="Model\TraderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

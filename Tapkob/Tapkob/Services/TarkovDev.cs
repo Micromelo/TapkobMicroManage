@@ -26,34 +26,150 @@ namespace Tapkob.Services
             {
                 Query = @"
                     query {
-                        tasks {
-                            id
-                            name
-                            trader {
-                                id
-                                name
-                            }
-                            map {
-                                id
-                                name
-                            }
-                            experience
-                            wikiLink
-                            minPlayerLevel
-                            taskRequirements {
-                                task {
-                                    name
-                                }
-                            }
-                            objectives {
-                                id
-                                type
-                                description
-                            }
-                            kappaRequired
-                            lightkeeperRequired
-                        }
-                    }
+  tasks {
+    id
+    tarkovDataId
+    name
+    trader {
+      id
+      name
+    }
+    map {
+      id
+      name
+    }
+    wikiLink
+    minPlayerLevel
+    taskRequirements {
+      task {
+        id
+        name
+      }
+      status
+    }
+    traderLevelRequirements {
+      trader {
+        id
+        name
+      }
+      level
+    }
+    objectives {
+      __typename
+      id
+      type
+      description
+      optional
+      maps {
+        id
+        name
+      }
+      ... on TaskObjectiveBuildItem {
+        item {
+          id
+        }
+        containsAll {
+          id
+        }
+        containsOne {
+          id
+        }
+      }
+      ... on TaskObjectiveItem {
+        item {
+          id
+        }
+        count
+        foundInRaid
+        dogTagLevel
+        maxDurability
+        minDurability
+      }
+      ... on TaskObjectiveMark {
+        markerItem {
+          id
+        }
+      }
+      ... on TaskObjectiveShoot {
+        usingWeapon {
+          id
+        }
+        usingWeaponMods {
+          id
+        }
+        wearing {
+          id
+        }
+        notWearing {
+          id
+        }
+      }
+      ... on TaskObjectiveQuestItem {
+        id
+        type
+        description
+        optional
+        questItem {
+          id
+          name
+          shortName
+          description
+        }
+        count
+      }
+    }
+    factionName
+    neededKeys {
+      keys {
+        id
+      }
+      map {
+        id
+        name
+      }
+    }
+  }
+  hideoutStations {
+    id
+    name
+    normalizedName
+    levels {
+      id
+      level
+      itemRequirements {
+        id
+        item {
+          id
+        }
+        count
+      }
+      stationLevelRequirements {
+        id
+        station {
+          id
+          name
+        }
+        level
+      }
+      crafts {
+        id
+        duration
+        requiredItems {
+          item {
+            id
+          }
+          count
+        }
+        rewardItems {
+          item {
+            id
+          }
+          count
+        }
+      }
+    }
+  }
+}
                 "
             };
 

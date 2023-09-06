@@ -27,7 +27,7 @@ namespace Tapkob.ViewModel
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<TaskObjectiveModel> TaskObjectives { get; set; }
+        public ObservableCollection<TaskObjectiveBasicModel> TaskObjectives { get; set; }
         public ObservableCollection<ItemModel> TaskKeys { get; set; }
         public ObservableCollection<TaskModel> TaskRewards { get; set; }
 
