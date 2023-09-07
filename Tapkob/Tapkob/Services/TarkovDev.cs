@@ -185,7 +185,7 @@ namespace Tapkob.Services
             //                    }
             //    }
 
-            var response = await client.SendQueryAsync<TasksResponse>(request);
+            var response = await client.SendQueryAsync<TasksResponse>(request).ConfigureAwait(false);
             Tasks = response.Data.tasks;
             return Tasks;
         }

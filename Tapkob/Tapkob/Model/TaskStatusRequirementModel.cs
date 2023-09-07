@@ -10,7 +10,7 @@ namespace Tapkob.Model
     public class TaskStatusRequirementModel
     {
         [JsonProperty("task")]
-        public Task Task { get; set; }
+        public TaskModel Task { get; set; }
 
         [JsonProperty("status")]
         public List<string> Status { get; set; }
