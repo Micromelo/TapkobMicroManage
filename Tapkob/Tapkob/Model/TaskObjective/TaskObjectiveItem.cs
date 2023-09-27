@@ -8,7 +8,7 @@ using Tapkob.Interfaces;
 
 namespace Tapkob.Model.TaskObjective
 {
-    public class TaskObjectiveExtractModel : ITaskObjective
+    public class TaskObjectiveItem : ITaskObjective
     {
 		[JsonProperty("id")]
 		public string Id { get; set; }
@@ -25,13 +25,22 @@ namespace Tapkob.Model.TaskObjective
 		[JsonProperty("optional")]
 		public bool Optional { get; set; }
 
-		[JsonProperty("exitStatus")]
-		public List<string> ExitStatus { get; set; }
+		[JsonProperty("item")]
+		public ItemModel Item { get; set; }
 
-		[JsonProperty("exitName")]
-		public string ExitName { get; set; }
+		[JsonProperty("count")]
+		public int Count { get; set; }
 
-		[JsonProperty("zoneNames")]
-		public List<string> ZoneNames { get; set; }
+		[JsonProperty("foundInRaid")]
+		public bool FoundInRaid { get; set; }
+
+		[JsonProperty("dogTagLevel")]
+		public int? DogTagLevel { get; set; }
+
+		[JsonProperty("maxDurability")]
+		public int? MaxDurability { get; set; }
+
+		[JsonProperty("minDurability")]
+		public int? MinDurability { get; set; }
 	}
 }

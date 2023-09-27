@@ -1,0 +1,127 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\jedwards2\\Documents\\Independent\\TapkobMicroManage\\Tapkob\\Tapkob\\Tapkob.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\jedwards2\\Documents\\Independent\\TapkobMicroManage\\Tapkob\\Tapkob\\Tapkob.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jedwards2\\Documents\\Independent\\TapkobMicroManage\\Tapkob\\Tapkob\\Tapkob.csproj",
+        "projectName": "Tapkob",
+        "projectPath": "C:\\Users\\jedwards2\\Documents\\Independent\\TapkobMicroManage\\Tapkob\\Tapkob\\Tapkob.csproj",
+        "packagesPath": "C:\\Users\\jedwards2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jedwards2\\Documents\\Independent\\TapkobMicroManage\\Tapkob\\Tapkob\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jedwards2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0-windows7.0": {
+            "targetAlias": "net7.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
+          "dependencies": {
+            "GraphQL.Client": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "GraphQL.Client.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "GraphQL.Client.Abstractions.Websocket": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "GraphQL.Client.Serializer.SystemTextJson": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "GraphQL.Primitives": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Bcl.AsyncInterfaces": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.CSharp": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Data.DataSetExtensions": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "System.Net.WebSockets.Client.Managed": {
+              "target": "Package",
+              "version": "[1.0.22, )"
+            },
+            "System.Reactive": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Runtime.CompilerServices.Unsafe": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.Text.Encodings.Web": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Tapkob.Interfaces;
 
-namespace Tapkob.Model
+namespace Tapkob.Model.TaskObjective
 {
-    public class TaskObjectiveBasicModel : ITaskObjective
+    public class TaskObjectiveQuestItem : ITaskObjective
     {
 		[JsonProperty("id")]
 		public string Id { get; set; }
@@ -24,5 +24,11 @@ namespace Tapkob.Model
 
 		[JsonProperty("optional")]
 		public bool Optional { get; set; }
+
+		[JsonProperty("questItem")]
+		public TaskQuestItemModel QuestItem { get; set; }
+
+		[JsonProperty("count")]
+		public int Count { get; set; }
 	}
 }

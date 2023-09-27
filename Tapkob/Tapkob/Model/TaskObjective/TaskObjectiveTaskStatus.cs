@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Tapkob.Interfaces;
 
-namespace Tapkob.Model
+namespace Tapkob.Model.TaskObjective
 {
-    public class TaskObjectiveExperienceModel : ITaskObjective
+    public class TaskObjectiveTaskStatus : ITaskObjective
     {
 		[JsonProperty("id")]
 		public string Id { get; set; }
@@ -25,7 +25,10 @@ namespace Tapkob.Model
 		[JsonProperty("optional")]
 		public bool Optional { get; set; }
 
-		[JsonProperty("healthEffect")]
-		public HealthEffectModel HealthEffect { get; set; }
+		[JsonProperty("task")]
+		public TaskModel Task { get; set; }
+
+		[JsonProperty("status")]
+		public List<string> Status { get; set; }
 	}
 }

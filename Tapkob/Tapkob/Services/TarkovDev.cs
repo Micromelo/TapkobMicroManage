@@ -1,197 +1,293 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
+using Newtonsoft.Json;
 using Tapkob.Model;
 
 namespace Tapkob.Services
 {
-    internal class TarkovDev
+    public static class TarkovDev
     {
-        private static readonly GraphQLHttpClient client = new GraphQLHttpClient("https://api.tarkov.dev/graphql", new SystemTextJsonSerializer());
-        private static readonly HttpClient httpClient = new HttpClient();
+        const string ApiEndpoint = "https://api.tarkov.dev/graphql";
+
+        private static readonly HttpClient HttpClient = new(new HttpClientHandler
+        {
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+        });
 
         public static ObservableCollection<TaskModel> Tasks { get; private set; } = new ObservableCollection<TaskModel>();
-
+        public static ObservableCollection<ItemModel> Items { get; private set; } = new ObservableCollection<ItemModel>();
+        
         public async static Task<ObservableCollection<TaskModel>> GetTasks()
         {
-            var request = new GraphQL.GraphQLRequest()
+            var body = new Dictionary<string, string>() { { "query", TasksQuery } };
+            var responseTask = HttpClient.PostAsJsonAsync(ApiEndpoint, body);
+            responseTask.Wait();
+
+            if (responseTask.Result.StatusCode != HttpStatusCode.OK) throw new Exception("Tarkov.dev API request failed.");
+            var contentTask = responseTask.Result.Content.ReadAsStringAsync();
+            contentTask.Wait();
+
+            var result = contentTask.Result;
+
+            // Hack to allow json deserialization
+            var replacement = @"""$type"":""Tapkob.Model.TaskObjective.$1, Tapkob""$2";
+            result = Regex.Replace(result, @"""__typename"":\s?""(.*?)""(,?)", replacement);
+
+            var jsonSerializerSettings = new JsonSerializerSettings()
             {
-                Query = @"
-                    query {
-  tasks {
-    id
-    tarkovDataId
-    name
-    trader {
-      id
-      name
-    }
-    map {
-      id
-      name
-    }
-    wikiLink
-    minPlayerLevel
-    taskRequirements {
-      task {
-        id
-        name
-      }
-      status
-    }
-    traderLevelRequirements {
-      trader {
-        id
-        name
-      }
-      level
-    }
-    objectives {
-      __typename
-      id
-      type
-      description
-      optional
-      maps {
-        id
-        name
-      }
-      ... on TaskObjectiveBuildItem {
-        item {
-          id
-        }
-        containsAll {
-          id
-        }
-        containsOne {
-          id
-        }
-      }
-      ... on TaskObjectiveItem {
-        item {
-          id
-        }
-        count
-        foundInRaid
-        dogTagLevel
-        maxDurability
-        minDurability
-      }
-      ... on TaskObjectiveMark {
-        markerItem {
-          id
-        }
-      }
-      ... on TaskObjectiveShoot {
-        usingWeapon {
-          id
-        }
-        usingWeaponMods {
-          id
-        }
-        wearing {
-          id
-        }
-        notWearing {
-          id
-        }
-      }
-      ... on TaskObjectiveQuestItem {
-        id
-        type
-        description
-        optional
-        questItem {
-          id
-          name
-          shortName
-          description
-        }
-        count
-      }
-    }
-    factionName
-    neededKeys {
-      keys {
-        id
-      }
-      map {
-        id
-        name
-      }
-    }
-  }
-  hideoutStations {
-    id
-    name
-    normalizedName
-    levels {
-      id
-      level
-      itemRequirements {
-        id
-        item {
-          id
-        }
-        count
-      }
-      stationLevelRequirements {
-        id
-        station {
-          id
-          name
-        }
-        level
-      }
-      crafts {
-        id
-        duration
-        requiredItems {
-          item {
-            id
-          }
-          count
-        }
-        rewardItems {
-          item {
-            id
-          }
-          count
-        }
-      }
-    }
-  }
-}
-                "
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                NullValueHandling = NullValueHandling.Ignore,
+                TypeNameHandling = TypeNameHandling.Auto,
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
             };
 
-            //finishRewards {
-            //    items {
-            //        item {
-            //            name
-            //                        }
-            //    }
-            //    neededKeys {
-            //        keys {
-            //            name
-            //                    }
-            //    }
-
-            var response = await client.SendQueryAsync<TasksResponse>(request).ConfigureAwait(false);
-            Tasks = response.Data.tasks;
+            var neededResponse = JsonConvert.DeserializeObject<TasksResponse>(result, jsonSerializerSettings);
+            Tasks = neededResponse.Data.tasks;
             return Tasks;
         }
+
         public class TasksResponse
         {
+            [JsonProperty("data")]
+            public TasksResponseData Data { get; set; }
+        }
+
+        public class TasksResponseData
+        {
+            [JsonProperty("tasks")]
             public ObservableCollection<TaskModel> tasks { get; set; }
         }
+
+        public async static Task<ObservableCollection<ItemModel>> GetItems()
+        {
+            var body = new Dictionary<string, string>() { { "query", ItemsQuery } };
+            var responseTask = HttpClient.PostAsJsonAsync(ApiEndpoint, body);
+            responseTask.Wait();
+
+            if (responseTask.Result.StatusCode != HttpStatusCode.OK) throw new Exception("Tarkov.dev API request failed.");
+            var contentTask = responseTask.Result.Content.ReadAsStringAsync();
+            contentTask.Wait();
+
+            var result = contentTask.Result;
+
+            var jsonSerializerSettings = new JsonSerializerSettings()
+            {
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                NullValueHandling = NullValueHandling.Ignore,
+                TypeNameHandling = TypeNameHandling.Auto,
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
+            };
+
+            var neededResponse = JsonConvert.DeserializeObject<ItemsResponse>(result, jsonSerializerSettings);
+            Items = neededResponse.Data.Items;
+            return Items;
+        }
+
+        public class ItemsResponse
+        {
+            [JsonProperty("data")]
+            public ItemsResponseData Data { get; set; }
+        }
+
+        public class ItemsResponseData
+        {
+            [JsonProperty("items")]
+            public ObservableCollection<ItemModel> Items { get; set; }
+        }
+
+        const string TasksQuery = @"
+                    query {
+                      tasks {
+                        id
+                        tarkovDataId
+                        name
+                        trader {
+                          id
+                          name
+                        }
+                        map {
+                          id
+                          name
+                        }
+                        wikiLink
+                        minPlayerLevel
+                        taskRequirements {
+                          task {
+                            id
+                            name
+                          }
+                          status
+                        }
+                        traderLevelRequirements {
+                          trader {
+                            id
+                            name
+                          }
+                          level
+                        }
+                        objectives {
+                          __typename
+                          id
+                          type
+                          description
+                          optional
+                          maps {
+                            id
+                            name
+                          }
+                          ... on TaskObjectiveBuildItem {
+                            item {
+                              id
+                            }
+                            containsAll {
+                              id
+                            }
+                            containsOne {
+                              id
+                            }
+                          }
+                          ... on TaskObjectiveExperience {
+                            healthEffect {
+                              bodyParts
+                              effects
+                              time {
+                                compareMethod
+                                value
+                              }
+                            }
+                          }
+                          ... on TaskObjectiveExtract {
+                            exitStatus
+                            exitName
+                            zoneNames
+                          }
+                          ... on TaskObjectiveItem {
+                            item {
+                              id
+                            }
+                            count
+                            foundInRaid
+                            dogTagLevel
+                            maxDurability
+                            minDurability
+                          }
+                          ... on TaskObjectiveMark {
+                            markerItem {
+                              id
+                            }
+                          }
+                          ... on TaskObjectivePlayerLevel {
+                            playerLevel
+                          }
+                          ... on TaskObjectiveShoot {
+                            count
+                            usingWeapon {
+                              id
+                            }
+                            usingWeaponMods {
+                              id
+                            }
+                            wearing {
+                              id
+                            }
+                            notWearing {
+                              id
+                            }
+                          }
+                          ... on TaskObjectiveQuestItem {
+                            questItem {
+                              id
+                              name
+                              shortName
+                              description
+                            }
+                            count
+                          }
+                          ... on TaskObjectiveSkill {
+                            skillLevel {
+                              name
+                              level
+                            }
+                          }
+                        }
+                        factionName
+                        neededKeys {
+                          keys {
+                            id
+                          }
+                          map {
+                            id
+                            name
+                          }
+                        }
+                      }
+                      hideoutStations {
+                        id
+                        name
+                        normalizedName
+                        levels {
+                          id
+                          level
+                          itemRequirements {
+                            id
+                            item {
+                              id
+                            }
+                            count
+                          }
+                          stationLevelRequirements {
+                            id
+                            station {
+                              id
+                              name
+                            }
+                            level
+                          }
+                          crafts {
+                            id
+                            duration
+                            requiredItems {
+                              item {
+                                id
+                              }
+                              count
+                            }
+                            rewardItems {
+                              item {
+                                id
+                              }
+                              count
+                            }
+                          }
+                        }
+                      }
+                    }
+                ";
+
+        const string ItemsQuery = @"
+                    query {
+                      items {
+                        id
+                        name
+                        description
+                        wikiLink
+                        baseImageLink
+                      }
+                    }
+                ";
     }
 }

@@ -8,7 +8,7 @@ using Tapkob.Interfaces;
 
 namespace Tapkob.Model.TaskObjective
 {
-    public class TaskObjectiveShootModel : ITaskObjective
+    public class TaskObjectiveShoot : ITaskObjective
     {
 		[JsonProperty("id")]
 		public string Id { get; set; }

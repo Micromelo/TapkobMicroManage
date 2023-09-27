@@ -8,7 +8,7 @@ using Tapkob.Interfaces;
 
 namespace Tapkob.Model.TaskObjective
 {
-    public class TaskObjectiveTaskStatusModel : ITaskObjective
+    public class TaskObjectiveExperience : ITaskObjective
     {
 		[JsonProperty("id")]
 		public string Id { get; set; }
@@ -25,10 +25,7 @@ namespace Tapkob.Model.TaskObjective
 		[JsonProperty("optional")]
 		public bool Optional { get; set; }
 
-		[JsonProperty("task")]
-		public TaskModel Task { get; set; }
-
-		[JsonProperty("status")]
-		public List<string> Status { get; set; }
+		[JsonProperty("healthEffect")]
+		public HealthEffectModel HealthEffect { get; set; }
 	}
 }

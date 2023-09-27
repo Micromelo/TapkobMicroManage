@@ -28,12 +28,18 @@ namespace Tapkob.ViewModel
         public MainVM()
         {
             UpdateViewCommand = new UpdateViewCommand(this);
-            UpdateTasks();
+            LoadTasks();
+            LoadItems();
         }
 
-        private async Task UpdateTasks()
+        private async Task LoadTasks()
         {
             await TarkovDev.GetTasks();
+        }
+
+        private async Task LoadItems()
+        {
+            await TarkovDev.GetItems();
         }
     }
 }

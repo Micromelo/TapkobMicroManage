@@ -213,7 +213,7 @@
                            Margin="5,0,0,0">
                 </TextBlock>
 
-                <ListView ItemsSource="{Binding SelectedTask.Objectives}"
+                <ListView ItemsSource="{Binding SelectedTaskObjectiveDescriptions}"
                           Background="Transparent"
                           BorderThickness="0"
                           Grid.Row="2"
@@ -245,15 +245,34 @@
                                     <DataTemplate>
                                         <Border Background="#2E333A"
                                                 MinHeight="80">
-                                            <TextBlock Text="{Binding Description}" 
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="{Binding Description}" 
+                                                           Grid.Row="0"
                                                            TextWrapping="Wrap"
+                                                           TextAlignment="Center"
                                                            Foreground="#FFFFFF"
                                                            FontFamily="Resources/Fonts/#Orbitron Medium"
                                                            FontSize="15"
-                                                           Margin="10,0,10,0"
+                                                           Margin="10,5,10,0"
                                                            HorizontalAlignment="Center" 
                                                            VerticalAlignment="Center">
-                                            </TextBlock>
+                                                </TextBlock>
+                                                <TextBlock Text="{Binding SubDescription}"
+                                                           Grid.Row="1"
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Center"
+                                                           Foreground="#FFFFFF"
+                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontSize="15"
+                                                           Margin="10,0,10,10"
+                                                           HorizontalAlignment="Center" 
+                                                           VerticalAlignment="Center">
+                                                </TextBlock>
+                                            </Grid>
                                         </Border>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

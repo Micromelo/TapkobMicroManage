@@ -8,7 +8,7 @@ using Tapkob.Interfaces;
 
 namespace Tapkob.Model.TaskObjective
 {
-    public class TaskObjectiveQuestItemModel : ITaskObjective
+    public class TaskObjectiveTraderLevel : ITaskObjective
     {
 		[JsonProperty("id")]
 		public string Id { get; set; }
@@ -25,10 +25,10 @@ namespace Tapkob.Model.TaskObjective
 		[JsonProperty("optional")]
 		public bool Optional { get; set; }
 
-		[JsonProperty("questItem")]
-		public TaskQuestItemModel QuestItem { get; set; }
+		[JsonProperty("trader")]
+		public TraderModel Trader { get; set; }
 
-		[JsonProperty("count")]
-		public int Count { get; set; }
+		[JsonProperty("level")]
+		public int Level { get; set; }
 	}
 }

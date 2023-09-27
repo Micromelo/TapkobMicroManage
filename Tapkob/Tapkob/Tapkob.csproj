@@ -7,6 +7,12 @@
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
   <ItemGroup>
     <Resource Include="Resources\Fonts\Orbitron-Medium.ttf" />
     <Resource Include="Resources\Fonts\Roboto-Light.ttf" />

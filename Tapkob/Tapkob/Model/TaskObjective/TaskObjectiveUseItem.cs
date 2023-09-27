@@ -6,22 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Tapkob.Interfaces;
 
-namespace Tapkob.Model
+namespace Tapkob.Model.TaskObjective
 {
-     public class TaskObjectiveBuildItemModel : ITaskObjective
+    public class TaskObjectiveUseItem : ITaskObjective
     {
-		[JsonProperty("item")]
-		public ItemModel Item { get; set; }
-
-		[JsonProperty("containsAll")]
-		public List<ItemModel> ContainsAll { get; set; }
-
-		[JsonProperty("containsOne")]
-		public List<ItemModel> ContainsOne { get; set; }
-
-		[JsonProperty("attributes")]
-		public List<AttributeThresholdModel> Attributes { get; set; }
-
 		[JsonProperty("id")]
 		public string Id { get; set; }
 
@@ -36,5 +24,17 @@ namespace Tapkob.Model
 
 		[JsonProperty("optional")]
 		public bool Optional { get; set; }
+
+		[JsonProperty("useAny")]
+		public List<ItemModel> UseAny { get; set; }
+
+		[JsonProperty("compareMethod")]
+		public string CompareMethod { get; set; }
+
+		[JsonProperty("count")]
+		public int Count { get; set; }
+
+		[JsonProperty("zoneNames")]
+		public List<string> ZoneName { get; set; }
 	}
 }
