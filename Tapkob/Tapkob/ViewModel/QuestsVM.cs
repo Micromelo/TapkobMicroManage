@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Navigation;
+using Tapkob.Commands;
 using Tapkob.Interfaces;
 using Tapkob.Model;
 using Tapkob.Model.TaskObjective;
@@ -15,7 +19,22 @@ namespace Tapkob.ViewModel
 {
     public class QuestsVM : BaseVM
     {
-        public ObservableCollection<TaskModel> Tasks { get; set; }
+        public ICommand ChangeTraderCommand { get; set; }
+
+        private ObservableCollection<TaskModel> traderTasks { get; set; }
+        public ObservableCollection<TaskModel> TraderTasks 
+        {
+            get 
+            {
+                return traderTasks;
+            } 
+            set 
+            {
+                traderTasks = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<ItemModel> Items { get; set; }
 
         private TaskModel selectedTask;
@@ -27,8 +46,23 @@ namespace Tapkob.ViewModel
             }
             set 
             {
-                selectedTask = value;
-                UpdateTaskObjectives(value);
+                if (value == null) 
+                {
+                    if (TraderTasks[0] != null)
+                    {
+                        selectedTask = TraderTasks[0];
+                    }
+                    else 
+                    {
+                        selectedTask = new TaskModel();
+                    }
+                }
+                else
+                {
+                    selectedTask = value;
+                }
+                
+                UpdateTaskObjectives(selectedTask);
                 OnPropertyChanged();
             }
         }
@@ -61,7 +95,8 @@ namespace Tapkob.ViewModel
 
         public QuestsVM()
         {
-            Tasks = new ObservableCollection<TaskModel>();
+            ChangeTraderCommand = new RelayCommand(ChangeTrader,CanChangeTrader);
+            TraderTasks = new ObservableCollection<TaskModel>();
             Items = new ObservableCollection<ItemModel>();
             LoadTasks();
             LoadItems();
@@ -69,7 +104,21 @@ namespace Tapkob.ViewModel
 
         public void LoadTasks()
         {
-            Tasks = TarkovDev.Tasks;
+            TraderTasks = TarkovDev.Tasks;
+        }
+
+        public void LoadTasks(string trader)
+        {
+            ObservableCollection<TaskModel> filteredTasks = new ObservableCollection<TaskModel>();
+            foreach (TaskModel task in TarkovDev.Tasks)
+            {
+                if (task.Trader.Name == trader)
+                {
+                    filteredTasks.Add(task);
+                }
+            }
+
+            TraderTasks = filteredTasks;
         }
         public void LoadItems()
         {
@@ -109,7 +158,7 @@ namespace Tapkob.ViewModel
                             break;
 
                         case TaskObjectiveExtract taskObjectiveExtract:
-                            if (taskObjectiveExtract.ExitName != String.Empty)
+                            if (taskObjectiveExtract.ExitName != String.Empty & taskObjectiveExtract.ExitName != null)
                                 subDescription = "Extract at: " + taskObjectiveExtract.ExitName;
                             else
                                 subDescription = string.Empty;
@@ -176,6 +225,49 @@ namespace Tapkob.ViewModel
             }
             
             return includeObjective;
+        }
+
+        private void ChangeTrader(object obj)
+        {
+            string trader = string.Empty;
+
+            switch (obj.ToString())
+            {
+                case "PraporQuestButton":
+                    trader = "Prapor";
+                    break;
+                case "TherapistQuestButton":
+                    trader = "Therapist";
+                    break;
+                case "SkierQuestButton":
+                    trader = "Skier";
+                    break;
+                case "PeacekeeperQuestButton":
+                    trader = "Peacekeeper";
+                    break;
+                case "MechanicQuestButton":
+                    trader = "Mechanic";
+                    break;
+                case "RagmanQuestButton":
+                    trader = "Ragman";
+                    break;
+                case "JaegerQuestButton":
+                    trader = "Jaeger";
+                    break;
+                case "FenceQuestButton":
+                    trader = "Fence";
+                    break;
+                case "LightkeeperQuestButton":
+                    trader = "Lightkeeper";
+                    break;
+            }
+
+            LoadTasks(trader);
+        }
+
+        private bool CanChangeTrader(object obj)
+        {
+            return true;
         }
     }
 }

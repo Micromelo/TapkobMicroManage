@@ -16,55 +16,90 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     Margin="0,10,0,0">
-            <Button Margin="0,0,10,0">
+            <Button x:Name="PraporQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_prapor.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button Margin="0,0,10,0">
+            <Button x:Name="TherapistQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_therapist.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button Margin="0,0,10,0">
+            <Button x:Name="SkierQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_skier.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button Margin="0,0,10,0">
+            <Button x:Name="PeacekeeperQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_peacekeeper.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button Margin="0,0,10,0">
+            <Button x:Name="MechanicQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_mechanic.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button Margin="0,0,10,0">
+            <Button x:Name="RagmanQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_ragman.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button Margin="0,0,10,0">
+            <Button x:Name="JaegerQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_jaeger.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button Margin="0,0,10,0">
+            <Button x:Name="FenceQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Margin="0,0,10,0"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_fence.png"
                        Width="64"
                        Height="64">
                 </Image>
             </Button>
-            <Button>
+            <Button x:Name="LightkeeperQuestButton" 
+                    Command="{Binding ChangeTraderCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Name}"
+                    Cursor="Hand">
                 <Image Source="/Resources/Icons/icon_trader_lightkeeper.png"
                        Width="64"
                        Height="64">
@@ -78,9 +113,11 @@
               HorizontalAlignment="Left">
 
             <!--// Complete Task Button //-->
-            <Button Height="40"
+            <Button x:Name="CompleteQuestButton" 
+                    Height="40"
                     Margin="5,5,5,5"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Cursor="Hand">
                 <TextBlock Text="COMPLETE"
                            FontFamily="Resources/Fonts/#Orbitron Medium"
                            FontSize="15"
@@ -109,7 +146,7 @@
 
 
             <!--// Task List //-->
-            <ListView ItemsSource="{Binding Tasks}"
+            <ListView ItemsSource="{Binding TraderTasks}"
                       SelectedItem="{Binding SelectedTask}"
                       Background="Transparent"
                       BorderThickness="0"
@@ -194,12 +231,17 @@
                       Height="40"
                       VerticalAlignment="Top"
                       Margin="5,5,10,5">
-                    <TextBlock Text="{Binding SelectedTask.Name}"
-                           Foreground="#FFFFFF"
-                           FontFamily="Resources/Fonts/#Orbitron Medium"
-                           FontSize="15"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center">
+                    <TextBlock  VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                         <Hyperlink NavigateUri="{Binding SelectedTask.WikiLink}" RequestNavigate="Hyperlink_RequestNavigate">
+                             <TextBlock Text="{Binding SelectedTask.Name}"
+                                        Foreground="#FFFFFF"
+                                        FontFamily="Resources/Fonts/#Orbitron Medium"
+                                        FontSize="15"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                             </TextBlock>
+                         </Hyperlink>
                     </TextBlock>
                 </Grid>
 
@@ -279,8 +321,6 @@
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
-
-
                 </ListView>
 
                 <TextBlock Text="Keys Needed"
@@ -294,8 +334,52 @@
                 </TextBlock>
 
                 <ListView ItemsSource="{Binding TaskKeys}"
-                          Grid.Row="4"
-                          Margin="5,5,10,5">
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Grid.Row="2"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          Margin="0,5,10,5">
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </ListView.Resources>
+                    
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#2E333A"
+                                                MinHeight="80">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Image>
+                                                    
+                                                </Image>
+                                                <TextBlock Text="{Binding SubDescription}"
+                                                           Grid.Row="1"
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Center"
+                                                           Foreground="#FFFFFF"
+                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontSize="15"
+                                                           Margin="10,0,10,10"
+                                                           HorizontalAlignment="Center" 
+                                                           VerticalAlignment="Center">
+                                                </TextBlock>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
 
                 </ListView>
 
