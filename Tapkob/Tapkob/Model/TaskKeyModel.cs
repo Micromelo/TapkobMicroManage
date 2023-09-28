@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,10 @@ namespace Tapkob.Model
 {
     public class TaskKeyModel
     {
-        public ItemModel[] keys { get; set; }
-        public MapModel map { get; set; }
+        [JsonProperty("keys")]
+        public List<ItemModel> Keys { get; set; }
+
+        [JsonProperty("map")]
+        public MapModel Map { get; set; }
     }
 }

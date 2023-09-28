@@ -63,6 +63,7 @@ namespace Tapkob.ViewModel
                 }
                 
                 UpdateTaskObjectives(selectedTask);
+                UpdateTaskNeededKeys(selectedTask.NeededKeys);
                 OnPropertyChanged();
             }
         }
@@ -90,6 +91,20 @@ namespace Tapkob.ViewModel
             {
                 Description = description;
                 SubDescription = subDescription;
+            }
+        }
+
+        private List<ItemModel> selectedTaskNeededKeys { get; set; }
+        public List<ItemModel> SelectedTaskNeededKeys
+        {
+            get
+            {
+                return selectedTaskNeededKeys;
+            }
+            set
+            {
+                selectedTaskNeededKeys = value;
+                OnPropertyChanged();
             }
         }
 
@@ -226,6 +241,21 @@ namespace Tapkob.ViewModel
             
             return includeObjective;
         }
+        private void UpdateTaskNeededKeys(List<TaskKeyModel> currentNeededKeys)
+        {
+            List<ItemModel> currentSelectedTaskNeededKeys = new List<ItemModel>();
+
+            foreach (TaskKeyModel neededKey in currentNeededKeys) 
+            { 
+                foreach(ItemModel key in neededKey.Keys)
+                {
+                    currentSelectedTaskNeededKeys.Add(key);
+                }
+            }
+
+            SelectedTaskNeededKeys = currentSelectedTaskNeededKeys;
+        }
+
 
         private void ChangeTrader(object obj)
         {

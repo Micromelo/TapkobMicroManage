@@ -153,7 +153,7 @@
                       VerticalAlignment="Stretch"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      Margin="5,70,5,5">
+                      Margin="5,70,5,5" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -233,7 +233,9 @@
                       Margin="5,5,10,5">
                     <TextBlock  VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
-                         <Hyperlink NavigateUri="{Binding SelectedTask.WikiLink}" RequestNavigate="Hyperlink_RequestNavigate">
+                         <Hyperlink NavigateUri="{Binding SelectedTask.WikiLink}" 
+                                    RequestNavigate="Hyperlink_RequestNavigate"
+                                    TextDecorations="None">
                              <TextBlock Text="{Binding SelectedTask.Name}"
                                         Foreground="#FFFFFF"
                                         FontFamily="Resources/Fonts/#Orbitron Medium"
@@ -261,7 +263,7 @@
                           Grid.Row="2"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          Margin="0,5,10,5">
+                          Margin="0,5,10,5" d:ItemsSource="{d:SampleData ItemCount=5}">
 
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -333,45 +335,72 @@
                            Margin="5,0,0,0">
                 </TextBlock>
 
-                <ListView ItemsSource="{Binding TaskKeys}"
+                <ListView ItemsSource="{Binding SelectedTaskNeededKeys}"
                           Background="Transparent"
                           BorderThickness="0"
-                          Grid.Row="2"
+                          Grid.Row="4"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          Margin="0,5,10,5">
+                          Margin="0,5,10,5" d:ItemsSource="{d:SampleData ItemCount=5}">
 
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Visibility" Value="Collapsed" />
                         </Style>
                     </ListView.Resources>
-                    
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" 
+                                       HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
                     <ListView.View>
                         <GridView>
                             <GridViewColumn>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Border Background="#2E333A"
-                                                MinHeight="80">
-                                            <Grid>
+                                                MinHeight="120"
+                                                MaxHeight="120"
+                                                HorizontalAlignment="Stretch">
+                                            <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GridView,AncestorLevel=1},Path=ActualWidth}">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
                                                     <RowDefinition Height="Auto"></RowDefinition>
                                                 </Grid.RowDefinitions>
-                                                <Image>
-                                                    
+                                                <Image Source="{Binding BaseImageLink}"
+                                                       Grid.Row="0"
+                                                       Height="64"
+                                                       Width="64"
+                                                       Margin="10,10,10,10">
                                                 </Image>
-                                                <TextBlock Text="{Binding SubDescription}"
-                                                           Grid.Row="1"
+                                                <TextBlock Grid.Row="1"
                                                            TextWrapping="Wrap"
                                                            TextAlignment="Center"
-                                                           Foreground="#FFFFFF"
-                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
-                                                           FontSize="15"
-                                                           Margin="10,0,10,10"
-                                                           HorizontalAlignment="Center" 
-                                                           VerticalAlignment="Center">
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Stretch">
+                                                    <Hyperlink NavigateUri="{Binding WikiLink}" 
+                                                               RequestNavigate="Hyperlink_RequestNavigate"
+                                                               TextDecorations="None">
+                                                        <TextBlock Text="{Binding Name}"
+                                                                   Grid.Row="1"
+                                                                   
+                                                                   
+                                                                   Foreground="#FFFFFF"
+                                                                   FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                                   FontSize="15"
+                                                                   Margin="10,10,10,10">  
+                                                        </TextBlock>
+                                                    </Hyperlink>
                                                 </TextBlock>
                                             </Grid>
                                         </Border>
@@ -395,7 +424,7 @@
 
                 <ListView ItemsSource="{Binding TaskRewards}"
                           Grid.Row="6"
-                          Margin="5,5,10,5">
+                          Margin="5,5,10,5" d:ItemsSource="{d:SampleData ItemCount=5}">
                 </ListView>
             </Grid>
         </Grid>

@@ -228,6 +228,10 @@ namespace Tapkob.Services
                         neededKeys {
                           keys {
                             id
+                            name
+                            description
+                            wikiLink
+                            baseImageLink
                           }
                           map {
                             id
