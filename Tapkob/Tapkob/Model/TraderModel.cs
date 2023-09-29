@@ -14,5 +14,8 @@ namespace Tapkob.Model
 
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        [JsonProperty("imageLink")]
+        public string ImageLink { get; set; }
     }
 }

@@ -47,6 +47,9 @@ namespace Tapkob.Services
             var replacement = @"""$type"":""Tapkob.Model.TaskObjective.$1, Tapkob""$2";
             result = Regex.Replace(result, @"""__typename"":\s?""(.*?)""(,?)", replacement);
 
+            // Hack to remove image backgrounds
+            result = Regex.Replace(result, ".webp", ".png");
+
             var jsonSerializerSettings = new JsonSerializerSettings()
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore,
@@ -222,6 +225,65 @@ namespace Tapkob.Services
                               name
                               level
                             }
+                          }
+                        }
+                        finishRewards {
+                          traderStanding {
+                            trader {
+                              id
+                              name
+                              imageLink
+                            }
+                            standing
+                          }
+                          items {
+                            item {
+                              id
+                              name
+                              description
+                              wikiLink
+                              baseImageLink
+                            }
+                            count
+                            quantity
+                            attributes {
+                              type
+                              name
+                              value
+                            }
+                          }
+                          offerUnlock {
+                            id
+                            trader {
+                              id
+                              name
+                              imageLink
+                            }
+                            level
+                            item {
+                              id
+                              name
+                              description
+                              wikiLink
+                              baseImageLink
+                            }
+                          }
+                          skillLevelReward {
+                            name
+                            level
+                          }
+                          traderUnlock {
+                            id
+                            name
+                            imageLink
+                          }
+                          craftUnlock {
+                            id
+                            station {
+                              id
+                              name
+                            }
+                            level
                           }
                         }
                         factionName

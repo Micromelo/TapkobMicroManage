@@ -64,6 +64,8 @@ namespace Tapkob.ViewModel
                 
                 UpdateTaskObjectives(selectedTask);
                 UpdateTaskNeededKeys(selectedTask.NeededKeys);
+                UpdateTaskRewards(selectedTask.TaskRewards);
+
                 OnPropertyChanged();
             }
         }
@@ -105,6 +107,38 @@ namespace Tapkob.ViewModel
             {
                 selectedTaskNeededKeys = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private List<TaskRewards> selectedTaskRewards { get; set; }
+        public List<TaskRewards> SelectedTaskRewards
+        {
+            get
+            {
+                return selectedTaskRewards;
+            }
+            set
+            {
+                selectedTaskRewards = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public class TaskRewards
+        {
+            public string Description { get; set; }
+            public string SubDescription { get; set; }
+            public string WikiLink { get; set; }
+            public string BaseImageLink { get; set; }
+            public string CategoryImagePath { get; set; }
+
+            public TaskRewards(string description, string subDescription, string wikiLink, string baseImageLink, string categoryImagePath)
+            {
+                Description = description;
+                SubDescription = subDescription;
+                WikiLink = wikiLink;
+                BaseImageLink = baseImageLink;
+                CategoryImagePath = categoryImagePath;
             }
         }
 
@@ -256,6 +290,36 @@ namespace Tapkob.ViewModel
             SelectedTaskNeededKeys = currentSelectedTaskNeededKeys;
         }
 
+        private void UpdateTaskRewards(TaskRewardModel currentRewards)
+        {
+            List<TaskRewards> currentSelectedTaskRewards = new List<TaskRewards>();
+
+            foreach(TraderStandingModel traderStanding in currentRewards.TraderStanding)
+            {
+                currentSelectedTaskRewards.Add(new TaskRewards(traderStanding.Trader.Name, traderStanding.Standing.ToString(), "", "/Resources/Icons/icon_trader_" + traderStanding.Trader.Name.ToLower() + ".png", "path"));
+            }
+            foreach (ContainedItemModel containedItem in currentRewards.Items)
+            {
+                currentSelectedTaskRewards.Add(new TaskRewards(containedItem.Item.Name, containedItem.Count.ToString(), containedItem.Item.WikiLink, containedItem.Item.BaseImageLink, "path"));
+            }
+            foreach (OfferUnlockModel offerUnlock in currentRewards.OfferUnlock)
+            {
+                currentSelectedTaskRewards.Add(new TaskRewards(offerUnlock.Item.Name, "(" + offerUnlock.Trader.Name + " LL" + offerUnlock.Level.ToString() + ")", offerUnlock.Item.WikiLink, offerUnlock.Item.BaseImageLink, "path"));
+            }
+            foreach (SkillLevelModel skillLevel in currentRewards.SkillLevelReward)
+            {
+                currentSelectedTaskRewards.Add(new TaskRewards(skillLevel.Name, "+ " + skillLevel.Level.ToString(), "", "path", "path"));
+            }
+            foreach (TraderModel trader in currentRewards.TraderUnlock)
+            {
+                currentSelectedTaskRewards.Add(new TaskRewards(trader.Name, "", "", "/Resources/Icons/icon_trader_" + trader.Name.ToLower() + ".png", "path"));
+            }
+
+            // Doesn't load any Crafts currently, revisit at later date.
+            //foreach (CraftModel craft in currentRewards.CraftUnlock) {}
+
+            SelectedTaskRewards = currentSelectedTaskRewards;
+        }
 
         private void ChangeTrader(object obj)
         {

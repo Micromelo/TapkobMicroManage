@@ -14,8 +14,12 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Icons\background.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\Fonts\Orbitron-Medium.ttf" />
     <Resource Include="Resources\Fonts\Roboto-Light.ttf" />
+    <Resource Include="Resources\Icons\background.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icon_assault_rifle.png" />
