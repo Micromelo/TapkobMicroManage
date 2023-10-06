@@ -125,7 +125,7 @@
                     VerticalAlignment="Top"
                     Cursor="Hand">
                 <TextBlock Text="COMPLETE"
-                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontFamily="/Resources/Fonts/#Bender"
                            FontSize="15"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center">
@@ -143,7 +143,7 @@
                     <CheckBox></CheckBox>
                     <TextBlock Text="Show Completed"
                                Foreground="#FFFFFF"
-                               FontFamily="Resources/Fonts/#Orbitron Medium"
+                               FontFamily="/Resources/Fonts/#Bender"
                                FontSize="12"
                                Margin="5,0,0,0">
                     </TextBlock>
@@ -157,9 +157,11 @@
                       Background="Transparent"
                       BorderThickness="0"
                       VerticalAlignment="Stretch"
+                      ScrollViewer.CanContentScroll="False"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      Margin="5,90,5,5" d:ItemsSource="{d:SampleData ItemCount=5}">
+                      Margin="5,90,5,5" 
+                      d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -186,26 +188,35 @@
                                                 Grid.Column="0"
                                                 MinHeight="80"
                                                 Margin="0,0,5,0">
-                                            <TextBlock Text="{Binding Name}" 
-                                                           TextWrapping="Wrap"
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Left">
+                                                <Image Source="{Binding TaskIconPath}"
+                                                       Grid.Column="0"
+                                                       Height="24"
+                                                       Width="24"
+                                                       Margin="5">
+                                                </Image>
+                                                <TextBlock Text="{Binding Name}" 
                                                            Foreground="#FFFFFF"
-                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontFamily="/Resources/Fonts/#Bender"
                                                            FontSize="15"
                                                            HorizontalAlignment="Center" 
-                                                           VerticalAlignment="Center">
-                                            </TextBlock>
+                                                           VerticalAlignment="Center"
+                                                           Margin="5">
+                                                </TextBlock>
+                                            </StackPanel>
                                         </Border>
                                         <Border Background="#902E333A"
                                                 Grid.Column="1"
                                                 MinWidth="30"
                                                 MinHeight="80">
-                                            <TextBlock Text="{Binding isCompleted}" 
-                                                           TextWrapping="Wrap"
-                                                           Foreground="#FFFFFF"
-                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
-                                                           FontSize="15"
-                                                           HorizontalAlignment="Center" 
-                                                           VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding IsCompleted}" 
+                                                       TextWrapping="Wrap"
+                                                       Foreground="#FFFFFF"
+                                                       FontFamily="/Resources/Fonts/#Bender"
+                                                       FontSize="15"
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center">
                                             </TextBlock>
                                         </Border>
                                     </Grid>
@@ -236,26 +247,60 @@
                       Grid.Row="0"
                       VerticalAlignment="Stretch"
                       Margin="5,5,10,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Image Source="{Binding SelectedTask.TaskIconPath}"
+                           Grid.Column="0"
+                           Height="24"
+                           Width="24"
+                           Margin="5">
+                    </Image>
+                    
                     <TextBlock  VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
+                                HorizontalAlignment="Left"
+                                Grid.Column="1">
                          <Hyperlink NavigateUri="{Binding SelectedTask.WikiLink}" 
                                     RequestNavigate="Hyperlink_RequestNavigate"
                                     TextDecorations="None">
                              <TextBlock Text="{Binding SelectedTask.Name}"
                                         Foreground="#FFFFFF"
-                                        FontFamily="Resources/Fonts/#Orbitron Medium"
+                                        FontFamily="/Resources/Fonts/#Bender"
                                         FontSize="25"
                                         VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
+                                        HorizontalAlignment="Center"
+                                        Margin="0,5">
                              </TextBlock>
                          </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Text="{Binding SelectedTask.Map.Name, FallbackValue='Any Location'}"
+                               Grid.Column="2"
+                               Foreground="#FFFFFF"
+                               FontFamily="/Resources/Fonts/#Bender"
+                               FontSize="15"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,35,0">
+                    </TextBlock>
+                    <TextBlock Text="Completed!"
+                               Grid.Column="3"
+                               Foreground="#FFFFFF"
+                               FontFamily="/Resources/Fonts/#Bender"
+                               FontSize="15"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,25,0">
                     </TextBlock>
                 </Grid>
 
                 <TextBlock Text="OBJECTIVE(S)"
                            Grid.Row="1"
                            Foreground="#FFFFFF"
-                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontFamily="/Resources/Fonts/#Bender"
                            FontSize="20"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
@@ -266,9 +311,10 @@
                           Background="Transparent"
                           BorderThickness="0"
                           Grid.Row="2"
+                          ScrollViewer.CanContentScroll="False"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          Margin="0,5,15,5" d:ItemsSource="{d:SampleData ItemCount=5}">
+                          Margin="0,5,15,5" d:ItemsSource="{d:SampleData ItemCount=2}">
 
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -311,36 +357,38 @@
                             <GridViewColumn Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView,AncestorLevel=1},Path=ActualWidth}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border Background="#2E333A"
+                                        <Border Background="#952E333A"
                                                 MinHeight="80">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="Auto"></RowDefinition>
-                                                </Grid.RowDefinitions>
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                                <Image Source="{Binding ObjectiveIconPath}"
+                                                       Height="24"
+                                                       Width="24"
+                                                       Margin="5">
+                                                </Image>
                                                 <TextBlock Text="{Binding Description}" 
-                                                           Grid.Row="0"
                                                            TextWrapping="Wrap"
                                                            TextAlignment="Center"
                                                            Foreground="#FFFFFF"
-                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontFamily="/Resources/Fonts/#Bender"
                                                            FontSize="15"
                                                            Margin="10,5,10,0"
                                                            HorizontalAlignment="Center" 
                                                            VerticalAlignment="Center">
                                                 </TextBlock>
                                                 <TextBlock Text="{Binding SubDescription}"
-                                                           Grid.Row="1"
                                                            TextWrapping="Wrap"
                                                            TextAlignment="Center"
                                                            Foreground="#FFFFFF"
-                                                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                           FontFamily="/Resources/Fonts/#Bender"
                                                            FontSize="15"
-                                                           Margin="10,0,10,10"
+                                                           Margin="10,5,10,0"
                                                            HorizontalAlignment="Center" 
-                                                           VerticalAlignment="Center">
+                                                           VerticalAlignment="Center" 
+                                                           FontWeight="Bold" 
+                                                           FontStyle="Italic">
                                                 </TextBlock>
-                                            </Grid>
+                                            </StackPanel>
                                         </Border>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -352,7 +400,7 @@
                 <TextBlock Text="NEEDED KEYS"
                            Grid.Row="3"
                            Foreground="#FFFFFF"
-                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontFamily="/Resources/Fonts/#Bender"
                            FontSize="20"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
@@ -360,12 +408,12 @@
                 </TextBlock>
 
                 <ListView ItemsSource="{Binding SelectedTaskNeededKeys}"
-                          Background="#35808080"
+                          Background="#35000000"
                           BorderThickness="0"
                           Grid.Row="4"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          Margin="0,5,15,5" d:ItemsSource="{d:SampleData ItemCount=5}">
+                          Margin="0,5,15,5" d:ItemsSource="{d:SampleData ItemCount=0}">
 
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -411,7 +459,7 @@
                             <GridViewColumn Width="200">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border Background="#902E333A"
+                                        <Border Background="#302E333A"
                                                 MinHeight="120"
                                                 MaxHeight="120"
                                                 MinWidth="120"
@@ -426,12 +474,13 @@
                                                         BorderThickness="1"
                                                         CornerRadius="5"
                                                         Grid.Row="0"
-                                                        Margin="65,5,65,5">
+                                                        Margin="10"
+                                                        HorizontalAlignment="Center">
                                                     <Image Source="{Binding BaseImageLink}"
-                                                       Grid.Row="0"
-                                                       Height="48"
-                                                       Width="48"
-                                                       Margin="0,5,0,5">
+                                                           Grid.Row="0"
+                                                           Height="48"
+                                                           Width="48"
+                                                           Margin="5">
                                                     </Image>
                                                 </Border>
                                                 
@@ -448,7 +497,7 @@
                                                                    VerticalAlignment="Center"
                                                                    HorizontalAlignment="Center"
                                                                    Foreground="#FFFFFF"
-                                                                   FontFamily="Resources/Fonts/#Orbitron Medium"
+                                                                   FontFamily="/Resources/Fonts/#Bender"
                                                                    FontSize="15"
                                                                    Margin="10,0,10,10">  
                                                         </TextBlock>
@@ -467,7 +516,7 @@
                 <TextBlock Text="REWARDS"
                            Grid.Row="5"
                            Foreground="#FFFFFF"
-                           FontFamily="Resources/Fonts/#Orbitron Medium"
+                           FontFamily="/Resources/Fonts/#Bender"
                            FontSize="20"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
@@ -475,12 +524,12 @@
                 </TextBlock>
 
                 <ListView ItemsSource="{Binding SelectedTaskRewards}"
-                          Background="#35808080"
+                          Background="#35000000"
                           BorderThickness="0"
                           Grid.Row="6"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          Margin="5,5,15,15" d:ItemsSource="{d:SampleData ItemCount=5}">
+                          Margin="5,5,15,15" d:ItemsSource="{d:SampleData ItemCount=0}">
 
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -526,23 +575,32 @@
                             <GridViewColumn Width="200">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border Background="#2E333A"
+                                        <Border Background="#302E333A"
                                                 MinHeight="140"
                                                 MaxHeight="140"
                                                 MinWidth="140"
                                                 HorizontalAlignment="Stretch">
-                                            <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GridView,AncestorLevel=1},Path=ActualWidth}">
+                                            <Grid>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="64"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
                                                     <RowDefinition Height="3*"></RowDefinition>
                                                     <RowDefinition Height="1*"></RowDefinition>
                                                 </Grid.RowDefinitions>
-                                                <Image Source="{Binding BaseImageLink}"
-                                                       Grid.Row="0"
-                                                       MaxHeight="64"
-                                                       MinWidth="48"
-                                                       Margin="5,5,5,5">
-                                                </Image>
+                                                <Border Background="#05FFFFFF"
+                                                        BorderBrush="#40FFFFFF"
+                                                        BorderThickness="1"
+                                                        MinHeight="48"
+                                                        CornerRadius="5"
+                                                        Grid.Row="0"
+                                                        Margin="10"
+                                                        HorizontalAlignment="Center">
+                                                    <Image Source="{Binding BaseImageLink}"
+                                                           Grid.Row="0"
+                                                           MaxHeight="40"
+                                                           MinWidth="48"
+                                                           Margin="5">
+                                                    </Image>
+                                                </Border>
                                                 <TextBlock Grid.Row="1"
                                                            VerticalAlignment="Center"
                                                            HorizontalAlignment="Center">
@@ -556,22 +614,24 @@
                                                                    VerticalAlignment="Center"
                                                                    HorizontalAlignment="Center"
                                                                    Foreground="#FFFFFF"
-                                                                   FontFamily="Resources/Fonts/#Orbitron Medium"
-                                                                   FontSize="15"
-                                                                   Margin="5,0,5,5">  
+                                                                   FontFamily="/Resources/Fonts/#Bender"
+                                                                   FontSize="13"
+                                                                   Margin="5,0,5,5" 
+                                                                   FontWeight="Bold">  
                                                         </TextBlock>
                                                     </Hyperlink>
                                                 </TextBlock>
                                                 <TextBlock Text="{Binding SubDescription}"
-                                                                   Grid.Row="2"
-                                                                   TextWrapping="Wrap"
-                                                                   TextAlignment="Center"
-                                                                   VerticalAlignment="Center"
-                                                                   HorizontalAlignment="Center"
-                                                                   Foreground="#FFFFFF"
-                                                                   FontFamily="Resources/Fonts/#Orbitron Medium"
-                                                                   FontSize="12"
-                                                                   Margin="5,0,5,5">
+                                                           Grid.Row="2"
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Center"
+                                                           Foreground="#FFFFFF"
+                                                           FontFamily="/Resources/Fonts/#Bender"
+                                                           FontSize="12"
+                                                           FontStyle="Oblique"
+                                                           Margin="5,0,5,5">
                                                 </TextBlock>
                                             </Grid>
                                         </Border>

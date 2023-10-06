@@ -14,9 +14,33 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Fonts\Bender-Black.otf" />
+    <None Remove="Resources\Fonts\Bender-BlackItalic.otf" />
+    <None Remove="Resources\Fonts\Bender-Bold.otf" />
+    <None Remove="Resources\Fonts\Bender-BoldItalic.otf" />
+    <None Remove="Resources\Fonts\Bender-Italic.otf" />
+    <None Remove="Resources\Fonts\Bender-Light.otf" />
+    <None Remove="Resources\Fonts\Bender-LightItalic.otf" />
+    <None Remove="Resources\Fonts\Bender.otf" />
     <None Remove="Resources\Icons\background.png" />
+    <None Remove="Resources\Icons\icon_objective_eliminate.png" />
+    <None Remove="Resources\Icons\icon_objective_escape.png" />
+    <None Remove="Resources\Icons\icon_objective_give.png" />
+    <None Remove="Resources\Icons\icon_objective_gun.png" />
+    <None Remove="Resources\Icons\icon_objective_location.png" />
+    <None Remove="Resources\Icons\icon_objective_search.png" />
+    <None Remove="Resources\Icons\icon_objective_skill.png" />
+    <None Remove="Resources\Icons\icon_objective_time.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Fonts\Bender-Black.otf" />
+    <Resource Include="Resources\Fonts\Bender-BlackItalic.otf" />
+    <Resource Include="Resources\Fonts\Bender-Bold.otf" />
+    <Resource Include="Resources\Fonts\Bender-BoldItalic.otf" />
+    <Resource Include="Resources\Fonts\Bender-Italic.otf" />
+    <Resource Include="Resources\Fonts\Bender-Light.otf" />
+    <Resource Include="Resources\Fonts\Bender-LightItalic.otf" />
+    <Resource Include="Resources\Fonts\Bender.otf" />
     <Resource Include="Resources\Fonts\Orbitron-Medium.ttf" />
     <Resource Include="Resources\Fonts\Roboto-Light.ttf" />
     <Resource Include="Resources\Icons\background.png" />
@@ -29,6 +53,14 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\icon_crafting.png" />
     <Resource Include="Resources\Icons\icon_market.png" />
+    <Resource Include="Resources\Icons\icon_objective_eliminate.png" />
+    <Resource Include="Resources\Icons\icon_objective_escape.png" />
+    <Resource Include="Resources\Icons\icon_objective_give.png" />
+    <Resource Include="Resources\Icons\icon_objective_gun.png" />
+    <Resource Include="Resources\Icons\icon_objective_location.png" />
+    <Resource Include="Resources\Icons\icon_objective_search.png" />
+    <Resource Include="Resources\Icons\icon_objective_skill.png" />
+    <Resource Include="Resources\Icons\icon_objective_time.png" />
     <Resource Include="Resources\Icons\icon_quest.png" />
     <Resource Include="Resources\Icons\icon_settings.png" />
   </ItemGroup>

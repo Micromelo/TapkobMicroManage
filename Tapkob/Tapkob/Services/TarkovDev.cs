@@ -15,6 +15,7 @@ using System.Xml.Linq;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
 using Newtonsoft.Json;
+using Tapkob.Interfaces;
 using Tapkob.Model;
 
 namespace Tapkob.Services
@@ -60,6 +61,7 @@ namespace Tapkob.Services
 
             var neededResponse = JsonConvert.DeserializeObject<TasksResponse>(result, jsonSerializerSettings);
             Tasks = neededResponse.Data.tasks;
+            LoadLocalTasksData();
             return Tasks;
         }
 
@@ -73,6 +75,45 @@ namespace Tapkob.Services
         {
             [JsonProperty("tasks")]
             public ObservableCollection<TaskModel> tasks { get; set; }
+        }
+
+        public static void LoadLocalTasksData()
+        {
+            for(int i = 0; i < Tasks.Count; i++)
+            {
+                switch (Tasks[i].Objectives[0].Type)
+                {
+                    case "buildWeapon":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_gun.png";
+                        break;
+                    case "shoot":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_eliminate.png";
+                        break;
+                    case "findItem":
+                    case "findQuestItem":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_search.png";
+                        break;
+                    case "giveItem":
+                    case "giveQuestItem":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_give.png";
+                        break;
+                    case "skill":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_skill.png";
+                        break;
+                    case "visit":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_location.png";
+                        break;
+                    case "experience":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_time.png";
+                        break;
+                    case "extract":
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_escape.png";
+                        break;
+                    default:
+                        Tasks[i].TaskIconPath = "/Resources/Icons/icon_objective_search.png";
+                        break;
+                }
+            }
         }
 
         public async static Task<ObservableCollection<ItemModel>> GetItems()

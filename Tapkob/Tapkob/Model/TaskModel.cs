@@ -49,6 +49,7 @@ namespace Tapkob.Model
         [JsonProperty("lightkeeperRequired")]
         public bool LightkeeperRequired { get; set; }
 
+        public string TaskIconPath { get; set; }
         public bool IsCompleted { get; set; }
 	}
 }

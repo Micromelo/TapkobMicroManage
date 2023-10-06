@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,11 +89,13 @@ namespace Tapkob.ViewModel
         {
             public string Description { get; set; }
             public string SubDescription { get; set; }
+            public string ObjectiveIconPath { get; set; }
 
-            public TaskObjectiveDescription(string description, string subDescription)
+            public TaskObjectiveDescription(string description, string subDescription, string objectiveIconPath)
             {
                 Description = description;
                 SubDescription = subDescription;
+                ObjectiveIconPath = objectiveIconPath;
             }
         }
 
@@ -130,15 +133,13 @@ namespace Tapkob.ViewModel
             public string SubDescription { get; set; }
             public string WikiLink { get; set; }
             public string BaseImageLink { get; set; }
-            public string CategoryImagePath { get; set; }
 
-            public TaskRewards(string description, string subDescription, string wikiLink, string baseImageLink, string categoryImagePath)
+            public TaskRewards(string description, string subDescription, string wikiLink, string baseImageLink)
             {
                 Description = description;
                 SubDescription = subDescription;
                 WikiLink = wikiLink;
                 BaseImageLink = baseImageLink;
-                CategoryImagePath = categoryImagePath;
             }
         }
 
@@ -195,15 +196,15 @@ namespace Tapkob.ViewModel
                     switch (taskObjective)
                     {
                         case TaskObjectiveBasic taskObjectiveBasic:
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveBasic.Type)));
                             break;
 
                         case TaskObjectiveBuildItem taskObjectiveBuildItem:
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveBuildItem.Type)));
                             break;
 
                         case TaskObjectiveExperience taskObjectiveExperience:
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveExperience.Type)));
                             break;
 
                         case TaskObjectiveExtract taskObjectiveExtract:
@@ -211,50 +212,50 @@ namespace Tapkob.ViewModel
                                 subDescription = "Extract at: " + taskObjectiveExtract.ExitName;
                             else
                                 subDescription = string.Empty;
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveExtract.Type)));
                             break;
 
                         case TaskObjectiveItem taskObjectiveItem:
                             subDescription = "Needed: " + taskObjectiveItem.Count.ToString();
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveItem.Type)));
                             break;
 
                         case TaskObjectiveMark taskObjectiveMark:
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveMark.Type)));
                             break;
 
                         case TaskObjectivePlayerLevel taskObjectivePlayerLevel:
                             subDescription = "Required Level: " + taskObjectivePlayerLevel.PlayerLevel.ToString();
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectivePlayerLevel.Type)));
                             break;
 
                         case TaskObjectiveQuestItem taskObjectiveQuestItem:
                             subDescription = "Amount: " + taskObjectiveQuestItem.Count.ToString();
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveQuestItem.Type)));
                             break;
 
                         case TaskObjectiveShoot taskObjectiveShoot:
                             subDescription = "Amount: " + taskObjectiveShoot.Count.ToString();
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveShoot.Type)));
                             break;
 
                         case TaskObjectiveSkill taskObjectiveSkill:
                             subDescription = "Required Level: " + taskObjectiveSkill.SkillLevel.Level.ToString();
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveSkill.Type)));
                             break;
 
                         case TaskObjectiveTaskStatus taskObjectiveTaskStatus:
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveTaskStatus.Type)));
                             break;
 
                         case TaskObjectiveTraderLevel taskObjectiveTraderLevel:
                             subDescription = "Required Level: " + taskObjectiveTraderLevel.Level.ToString();
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveTraderLevel.Type)));
                             break;
 
                         case TaskObjectiveUseItem taskObjectiveUseItem:
                             subDescription = "Amount: " + taskObjectiveUseItem.Count.ToString();
-                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription));
+                            currentSelectedTaskObjectives.Add(new TaskObjectiveDescription(description, subDescription, GetTaskObjectiveIconPath(taskObjectiveUseItem.Type)));
                             break;
                     }
                 }
@@ -262,19 +263,60 @@ namespace Tapkob.ViewModel
             SelectedTaskObjectiveDescriptions = currentSelectedTaskObjectives;
         }
 
+        private string GetTaskObjectiveIconPath(string objectiveType)
+        {
+            string taskObjectiveIconPath = string.Empty;
+
+            switch (objectiveType)
+            {
+                case "buildWeapon":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_gun.png";
+                    break;
+                case "shoot":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_eliminate.png";
+                    break;
+                case "findItem":
+                case "findQuestItem":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_search.png";
+                    break;
+                case "giveItem":
+                case "giveQuestItem":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_give.png";
+                    break;
+                case "skill":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_skill.png";
+                    break;
+                case "visit":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_location.png";
+                    break;
+                case "experience":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_time.png";
+                    break;
+                case "extract":
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_escape.png";
+                    break;
+                default:
+                    taskObjectiveIconPath = "/Resources/Icons/icon_objective_search.png";
+                    break;
+            }
+
+            return taskObjectiveIconPath;
+        }
+
         private bool IncludeObjective(ITaskObjective objective)
         {
             bool includeObjective = true;
 
-            switch (objective.Type)
-            {
-                case "giveQuestItem":
-                    includeObjective = false;
-                    break;
-            }
+            //switch (objective.Type)
+            //{
+            //    case "giveQuestItem":
+            //        includeObjective = false;
+            //        break;
+            //}
             
             return includeObjective;
         }
+
         private void UpdateTaskNeededKeys(List<TaskKeyModel> currentNeededKeys)
         {
             List<ItemModel> currentSelectedTaskNeededKeys = new List<ItemModel>();
@@ -293,30 +335,54 @@ namespace Tapkob.ViewModel
         private void UpdateTaskRewards(TaskRewardModel currentRewards)
         {
             List<TaskRewards> currentSelectedTaskRewards = new List<TaskRewards>();
+            string subDescription = string.Empty;
+            string baseImageLink = string.Empty;
 
-            foreach(TraderStandingModel traderStanding in currentRewards.TraderStanding)
+            foreach (TraderStandingModel traderStanding in currentRewards.TraderStanding)
             {
-                currentSelectedTaskRewards.Add(new TaskRewards(traderStanding.Trader.Name, traderStanding.Standing.ToString(), "", "/Resources/Icons/icon_trader_" + traderStanding.Trader.Name.ToLower() + ".png", "path"));
+                if (traderStanding.Standing > 0)
+                    subDescription = "+" + traderStanding.Standing.ToString();
+                else
+                    subDescription = traderStanding.Standing.ToString();
+                baseImageLink = "/Resources/Icons/icon_trader_" + traderStanding.Trader.Name.ToLower() + ".png";
+
+                currentSelectedTaskRewards.Add(new TaskRewards(traderStanding.Trader.Name, subDescription, "", baseImageLink));
             }
             foreach (ContainedItemModel containedItem in currentRewards.Items)
             {
-                currentSelectedTaskRewards.Add(new TaskRewards(containedItem.Item.Name, containedItem.Count.ToString(), containedItem.Item.WikiLink, containedItem.Item.BaseImageLink, "path"));
+                if (containedItem.Item.Name == "Roubles")
+                    subDescription = String.Format("{0:N0}", containedItem.Count) + "₽";
+                else if (containedItem.Item.Name == "Dollars")
+                    subDescription = "$" + String.Format("{0:N0}", containedItem.Count);
+                else if (containedItem.Item.Name == "Euros")
+                    subDescription = "€" + String.Format("{0:N0}", containedItem.Count);
+                else
+                    subDescription = "x" + containedItem.Count.ToString();
+                baseImageLink = containedItem.Item.BaseImageLink;
+
+                currentSelectedTaskRewards.Add(new TaskRewards(containedItem.Item.Name, subDescription, containedItem.Item.WikiLink, baseImageLink));
             }
             foreach (OfferUnlockModel offerUnlock in currentRewards.OfferUnlock)
             {
-                currentSelectedTaskRewards.Add(new TaskRewards(offerUnlock.Item.Name, "(" + offerUnlock.Trader.Name + " LL" + offerUnlock.Level.ToString() + ")", offerUnlock.Item.WikiLink, offerUnlock.Item.BaseImageLink, "path"));
+                subDescription = "(" + offerUnlock.Trader.Name + " LL" + offerUnlock.Level.ToString() + ")";
+                baseImageLink = offerUnlock.Item.BaseImageLink;
+
+                currentSelectedTaskRewards.Add(new TaskRewards(offerUnlock.Item.Name, subDescription, offerUnlock.Item.WikiLink, baseImageLink));
             }
             foreach (SkillLevelModel skillLevel in currentRewards.SkillLevelReward)
             {
-                currentSelectedTaskRewards.Add(new TaskRewards(skillLevel.Name, "+ " + skillLevel.Level.ToString(), "", "path", "path"));
+                subDescription = "+" + skillLevel.Level.ToString() + " Level(s)";
+                baseImageLink = "path";
+
+                currentSelectedTaskRewards.Add(new TaskRewards(skillLevel.Name, subDescription, "", baseImageLink));
             }
             foreach (TraderModel trader in currentRewards.TraderUnlock)
             {
-                currentSelectedTaskRewards.Add(new TaskRewards(trader.Name, "", "", "/Resources/Icons/icon_trader_" + trader.Name.ToLower() + ".png", "path"));
-            }
+                subDescription = "Unlocked";
+                baseImageLink = "/Resources/Icons/icon_trader_" + trader.Name.ToLower() + ".png";
 
-            // Doesn't load any Crafts currently, revisit at later date.
-            //foreach (CraftModel craft in currentRewards.CraftUnlock) {}
+                currentSelectedTaskRewards.Add(new TaskRewards(trader.Name, subDescription, "", baseImageLink));
+            }
 
             SelectedTaskRewards = currentSelectedTaskRewards;
         }

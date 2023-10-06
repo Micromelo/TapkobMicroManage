@@ -78,7 +78,7 @@
 
                     <!--// Main Menu - Quests //-->
                     <MenuItem Header="Quests"
-                              Template="{StaticResource Menu_SubMenu_Template}" 
+                              Template="{StaticResource Menu_Template}" 
                               Click="MenuItem_Click"
                               Command="{Binding UpdateViewCommand}"
                               CommandParameter="Quests">
