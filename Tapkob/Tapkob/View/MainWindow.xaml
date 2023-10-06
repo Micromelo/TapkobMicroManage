@@ -69,8 +69,8 @@
                     <MenuItem Header="Home"
                               Template="{StaticResource Menu_Template}"
                               Command="{Binding UpdateViewCommand}"
-                              CommandParameter="Home">
-
+                              CommandParameter="Home"
+                              Cursor="Hand">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_home.png"></Image>
                         </MenuItem.Icon>
@@ -81,8 +81,8 @@
                               Template="{StaticResource Menu_Template}" 
                               Click="MenuItem_Click"
                               Command="{Binding UpdateViewCommand}"
-                              CommandParameter="Quests">
-
+                              CommandParameter="Quests"
+                              Cursor="Hand">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_quest.png"></Image>
                         </MenuItem.Icon>
@@ -90,8 +90,8 @@
 
                     <!--// Main Menu - Market //-->
                     <MenuItem Header="Market"
-                          Template="{StaticResource Menu_Template}">
-
+                              Template="{StaticResource Menu_Template}"
+                              Cursor="Hand">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_market.png"></Image>
                         </MenuItem.Icon>
@@ -99,8 +99,8 @@
 
                     <!--// Main Menu - Crafting //-->
                     <MenuItem Header="Crafting"
-                          Template="{StaticResource Menu_SubMenu_Template}">
-
+                              Template="{StaticResource Menu_SubMenu_Template}"
+                              Cursor="Hand">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_crafting.png"></Image>
                         </MenuItem.Icon>
@@ -108,42 +108,37 @@
 
                     <!--// Main Menu - Ammo //-->
                     <MenuItem Header="Ammo"
-                          Template="{StaticResource Menu_SubMenu_Template}">
-
+                              Template="{StaticResource Menu_SubMenu_Template}"
+                              Cursor="Hand">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_bullet.png"></Image>
                         </MenuItem.Icon>
 
                         <!--// Sub Menu - All Ammunition //-->
                         <MenuItem Header="All Ammunition"
-                          Template="{StaticResource Item_Template}">
-
+                                  Template="{StaticResource Item_Template}">
                         </MenuItem>
 
                         <!--// Sub Menu - 7.62x25mm //-->
                         <MenuItem Header="7.62x25mm"
-                          Template="{StaticResource Item_Template}">
-
+                                  Template="{StaticResource Item_Template}">
                         </MenuItem>
 
                         <!--// Sub Menu - 9x18mm //-->
                         <MenuItem Header="9x18mm"
-                          Template="{StaticResource Item_Template}">
-
+                                  Template="{StaticResource Item_Template}">
                         </MenuItem>
 
                         <!--// Sub Menu - 9x19mm //-->
                         <MenuItem Header="9x19mm"
-                          Template="{StaticResource Item_Template}">
-
+                                  Template="{StaticResource Item_Template}">
                         </MenuItem>
-
                     </MenuItem>
 
                     <!--// Main Menu - Settings //-->
                     <MenuItem Header="Settings"
-                          Template="{StaticResource Menu_Template}">
-
+                              Template="{StaticResource Menu_Template}"
+                              Cursor="Hand">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_settings.png"></Image>
                         </MenuItem.Icon>
@@ -151,8 +146,8 @@
 
                     <!--// Main Menu - Escape //-->
                     <MenuItem Header="Escape"
-                          Template="{StaticResource Menu_Template}" Click="MenuItemEscape_Click">
-
+                              Template="{StaticResource Menu_Template}" Click="MenuItemEscape_Click"
+                              Cursor="Hand">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/icon_escape.png"></Image>
                         </MenuItem.Icon>
@@ -170,15 +165,18 @@
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
                     <Button x:Name="BtnMinimise"
-                    Style="{StaticResource MiniBtnStyle}" Click="BtnMinimise_Click">
+                            Style="{StaticResource MiniBtnStyle}" Click="BtnMinimise_Click"
+                            Cursor="Hand">
                     </Button>
 
                     <Button x:Name="BtnMaximise"
-                    Style="{StaticResource MaxBtnStyle}" Click="BtnMaximise_Click">
+                            Style="{StaticResource MaxBtnStyle}" Click="BtnMaximise_Click"
+                            Cursor="Hand">
                     </Button>
 
                     <Button x:Name="BtnClose"
-                    Style="{StaticResource CloseBtnStyle}" Click="BtnClose_Click">
+                            Style="{StaticResource CloseBtnStyle}" Click="BtnClose_Click"
+                            Cursor="Hand">
                     </Button>
                 </StackPanel>
             </Grid>

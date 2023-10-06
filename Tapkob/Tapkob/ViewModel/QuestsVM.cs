@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -452,12 +453,15 @@ namespace Tapkob.ViewModel
 
         private void CompleteTask(object obj)
         {
-            if (SelectedTask.TaskStatus == "Active")
-                SelectedTask.TaskStatus = "Completed";
-            else if (SelectedTask.TaskStatus == "Completed")
-                SelectedTask.TaskStatus = "Active";
-            Sqlite.SaveTasksStatus(SelectedTask);
-            LoadTasks(CurrentTrader);
+            if (SelectedTask != null)
+            {
+                if (SelectedTask.TaskStatus == "Active")
+                    SelectedTask.TaskStatus = "Completed";
+                else if (SelectedTask.TaskStatus == "Completed")
+                    SelectedTask.TaskStatus = "Active";
+                Sqlite.SaveTasksStatus(SelectedTask);
+                LoadTasks(CurrentTrader);
+            }
         }
 
         private bool CanCompleteTask(object obj)
