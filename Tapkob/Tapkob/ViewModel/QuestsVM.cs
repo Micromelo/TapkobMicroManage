@@ -21,6 +21,11 @@ namespace Tapkob.ViewModel
     public class QuestsVM : BaseVM
     {
         public ICommand ChangeTraderCommand { get; set; }
+        public ICommand ShowCompletedCommand { get; set; }
+        public ICommand CompleteTaskCommand { get; set; }
+
+        private string CurrentTrader { get; set; }
+        private bool ShowCompletedChecked { get; set; }
 
         private ObservableCollection<TaskModel> traderTasks { get; set; }
         public ObservableCollection<TaskModel> TraderTasks 
@@ -146,30 +151,33 @@ namespace Tapkob.ViewModel
         public QuestsVM()
         {
             ChangeTraderCommand = new RelayCommand(ChangeTrader,CanChangeTrader);
+            ShowCompletedCommand = new RelayCommand(ShowCompleted, CanShowCompleted);
+            CompleteTaskCommand = new RelayCommand(CompleteTask, CanCompleteTask);
             TraderTasks = new ObservableCollection<TaskModel>();
             Items = new ObservableCollection<ItemModel>();
-            LoadTasks();
+            CurrentTrader = "Prapor";
+            LoadTasks(CurrentTrader);
             LoadItems();
         }
 
-        public void LoadTasks()
-        {
-            TraderTasks = TarkovDev.Tasks;
-        }
+        //public void LoadTasks()
+        //{
+        //    TraderTasks = TarkovDev.Tasks;
+        //}
 
         public void LoadTasks(string trader)
         {
             ObservableCollection<TaskModel> filteredTasks = new ObservableCollection<TaskModel>();
             foreach (TaskModel task in TarkovDev.Tasks)
             {
-                if (task.Trader.Name == trader)
+                if (task.Trader.Name == trader && (task.TaskStatus != "Completed" || ShowCompletedChecked))
                 {
                     filteredTasks.Add(task);
                 }
             }
-
             TraderTasks = filteredTasks;
         }
+
         public void LoadItems()
         {
             Items = TarkovDev.Items;
@@ -422,10 +430,37 @@ namespace Tapkob.ViewModel
                     break;
             }
 
-            LoadTasks(trader);
+            CurrentTrader = trader;
+            LoadTasks(CurrentTrader);
         }
 
         private bool CanChangeTrader(object obj)
+        {
+            return true;
+        }
+
+        private void ShowCompleted(object obj)
+        {
+            ShowCompletedChecked = (Boolean) obj;
+            LoadTasks(CurrentTrader);
+        }
+
+        private bool CanShowCompleted(object obj)
+        {
+            return true;
+        }
+
+        private void CompleteTask(object obj)
+        {
+            if (SelectedTask.TaskStatus == "Active")
+                SelectedTask.TaskStatus = "Completed";
+            else if (SelectedTask.TaskStatus == "Completed")
+                SelectedTask.TaskStatus = "Active";
+            Sqlite.SaveTasksStatus(SelectedTask);
+            LoadTasks(CurrentTrader);
+        }
+
+        private bool CanCompleteTask(object obj)
         {
             return true;
         }

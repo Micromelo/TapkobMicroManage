@@ -93,6 +93,7 @@
     <Resource Include="Notes.txt" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.4" />
     <PackageReference Include="GraphQL.Client" Version="6.0.0" />
     <PackageReference Include="GraphQL.Client.Abstractions" Version="6.0.0" />
     <PackageReference Include="GraphQL.Client.Abstractions.Websocket" Version="6.0.0" />
@@ -100,6 +101,7 @@
     <PackageReference Include="GraphQL.Primitives" Version="6.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
     <PackageReference Include="System.Net.WebSockets.Client.Managed" Version="1.0.22" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />

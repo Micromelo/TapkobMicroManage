@@ -79,6 +79,9 @@ namespace Tapkob.Services
 
         public static void LoadLocalTasksData()
         {
+            Sqlite.InitializeTasksTable(Tasks);
+            Tasks = Sqlite.LoadTasksStatus(Tasks);
+
             for(int i = 0; i < Tasks.Count; i++)
             {
                 switch (Tasks[i].Objectives[0].Type)
