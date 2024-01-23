@@ -7,10 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tapkob.Model;
-using static Tapkob.Services.Sqlite;
 
 namespace Tapkob.Services
 {
@@ -22,19 +19,25 @@ namespace Tapkob.Services
 
         public static void InitializeTasksTable(ObservableCollection<TaskModel> Tasks) 
         {
+            List<String> sqlTasksIDs = new List<String>();
             SqlTask sqlTask = new SqlTask();
 
             using (IDbConnection conn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = conn.QueryFirst<int>("SELECT COUNT(*) FROM Tasks");
-                if (output != Tasks.Count)
+                var output = conn.Query<String>("SELECT TaskID FROM Tasks", new DynamicParameters());
+                sqlTasksIDs = output.ToList();
+                if (sqlTasksIDs.Count != Tasks.Count)
                 {
                     foreach (TaskModel task in Tasks)
                     {
-                        sqlTask.TaskID = task.Id;
-                        sqlTask.TaskStatus = "Active";
+                        string result = sqlTasksIDs.FirstOrDefault(x => x == task.Id);
+                        if (result == null)
+                        {
+                            sqlTask.TaskID = task.Id;
+                            sqlTask.TaskStatus = "Active";
 
-                        conn.Execute("INSERT INTO Tasks(TaskID, TaskStatus) VALUES(@TaskID, @TaskStatus)", sqlTask);
+                            conn.Execute("INSERT INTO Tasks(TaskID, TaskStatus) VALUES(@TaskID, @TaskStatus)", sqlTask);
+                        }
                     }
                 }
             }

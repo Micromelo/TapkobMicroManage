@@ -169,6 +169,7 @@ namespace Tapkob.ViewModel
         public void LoadTasks(string trader)
         {
             ObservableCollection<TaskModel> filteredTasks = new ObservableCollection<TaskModel>();
+            TarkovDev.LoadLocalTasksData();
             foreach (TaskModel task in TarkovDev.Tasks)
             {
                 if (task.Trader.Name == trader && (task.TaskStatus != "Completed" || ShowCompletedChecked))
